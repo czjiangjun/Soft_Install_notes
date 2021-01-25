@@ -1,0 +1,12 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+#	sparsecheckout = true
+[remote "BCC_Latex"]
+	url = git@github.com:czjiangjun/Latex_Beamer.git
+	fetch = +refs/heads/*:refs/remotes/BCC_Latex/*
+[branch "master"]
+	remote = BCC_Latex
+	merge = refs/heads/master
