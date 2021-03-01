@@ -248,8 +248,8 @@
 			\item \textrm{/usr/share/texlive/texmf-dist/} \qquad\#\textcolor{red}{默认建议用\textrm{/usr/share/texlive/texmf-dist/tex/latex/}}
 		\end{enumerate}
 然后执行命令\\
-\textrm{sudo~texhash}\\
-\# \textcolor{red}{默认建议命令为}:~\textrm{sudo~texhash~~/usr/share/texlive/texmf-dist/tex/latex/}\\
+\textrm{sudo~texhash} \qquad\# 建议具体到\textrm{.sty}所在目录下用$\ast$标记:~\textrm{sudo~texhash~~/usr/share/texlive/texmf-dist/tex/latex/*}\\
+\# \textcolor{red}{默认建议命令为}:~\textrm{sudo~texhash~~/usr/share/texlive/texmf-dist/tex/latex/*}\\
 然后理应就找到了
 \item 方法二:~进入\textrm{/home}目录，在\textrm{/home}目录下创建如下文件夹\textrm{texmf/tex/latex}，假设我们添加的宏包叫做\textrm{foo.sty},就创建名字为\textrm{foo}的文件夹:
 	\begin{enumerate}
@@ -258,18 +258,53 @@
 		\item 将\textrm{foo.sty}放入\textrm{foo}文件夹中
 	\end{enumerate}
 再执行下面的命令\\
-\textrm{texhash~\~/texmf}
+\textrm{texhash~\~/texmf/*} \#建议具体到\textrm{.sty}所在文件\\
 就没事儿了
+
+\textcolor{red}{命令\textrm{texhash}与\textrm{mktexlsr}效果相同，但区别是}:
+\begin{itemize}
+	\item \textrm{texhash}~针对的是目录
+	\item \textrm{mktexlsr}~针对的是具体文件
+\end{itemize}
+所以建议两个命令都用!
 \end{itemize}
 
 \section{常用的编辑工具}
 \begin{itemize}
 	\item \textrm{pdf}编辑:~\textrm{pdfarranger}
 	\item 图片编辑:~\textrm{gimp}
+	\item 摄像头驱动:~\textrm{guvcview}
 	\item 在线视频:~\textrm{obs-studio}
 	\item \textrm{Origin}:~\textrm{labplot}
+	\item \textrm{视频编辑}:~\textrm{kdenlive}
 	\item \textrm{cooledit}:~\textrm{audacity}
+	\item \textrm{千千静听}:~\textrm{qmmp}
 \end{itemize}
+
+\section{Virtualbox}
+\textcolor{blue}{\textrm{VirtualBox kernel driver not installed.\\
+The vboxdrv kernel module was either not loaded or /dev/vboxdrv was not created for some reason.\\
+‘/etc/init.d/vboxdrv setup’\\
+as root.\\
+VBox status code: -1908 (VERR\_VM\_DRIVER\_NOT\_INSTALLED)}} \\
+
+按照提示在终端里输入\\
+\textcolor{red}{\textrm{sudo /etc/init.d/vboxdrv setup}}\\
+仍然不行。给的信息是:\\
+
+\textcolor{blue}{\textrm{Stopping VirtualBox kernel modules ...done.\\
+Recompiling VirtualBox kernel modules ...failed!\\
+  (Look at /var/log/vbox-install.log to find out what went wrong)}} \\
+
+打开/var/log/vbox-install.log文件\\
+
+\textcolor{blue}{\textrm{Makefile:73: *** Error: unable to find the sources of your current Linux kernel. Specify KERN\_DIR= and run Make again.}}\\
+
+更新的时候升级了\textrm{Linux kernel}，所以\textrm{vboxdrv}需要重新编译。因为是从源里面直接更新的，没有Linux kernel的源文件，显然编译需要这些源文件，最后解决方法如下\\
+
+\textcolor{red}{\textrm{sudo apt-get install linux-headers-\$(uname -r)\\
+sudo apt-get install dkms\\
+sudo /etc/init.d/vboxdrv setup}}
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
