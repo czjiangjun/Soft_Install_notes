@@ -189,7 +189,15 @@
 		将上述\textcolor{red}{sudo\; apt-get\; install\; libglut-dev}命令改成\textcolor{blue}{sudo\; apt-get\; install\; freeglut3-dev}即可。 
 \end{itemize}
 
-
+\section{ffmpeg合并多个视频}
+\begin{itemize}
+	\item 安装:~\textrm{sudo apt-get install ffmpeg}
+	\item 待合并的视频文件名写入文件\textrm{to\_be\_merged.txt}，文件内容:\\
+		\textrm{file 绝对路径\视频名-xx}\\
+		\textrm{file 绝对路径\视频名-yy}\\
+		\textrm{file 绝对路径\视频名-zz}
+	\item 运行命令:~\textcolor{red}{\textrm{ffmpeg -f concat -safe 0 -i to\_be\_merged.txt -c copy output.mp4}}即可
+\end{itemize}
 
 
 
