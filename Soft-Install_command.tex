@@ -91,7 +91,7 @@
 %\addcontentsline{toc}{section}{Bibliography}
 
 %-------------------------------The Title of The Paper-----------------------------------------%
-\title{WIEN2k软件的安装}
+\title{软件的安装}
 %----------------------------------------------------------------------------------------------%
 
 %----------------------The Authors and the address of The Paper--------------------------------%
@@ -409,6 +409,57 @@ rm -rf \$WIEN2K\_RUNDIR \\
 
 %一般需要修改的地方已用红字标出
 该脚本可以实现算例的初始化，必须在存在*.struct的前提下进行。
+
+\section{\rm{LAMMPS}的安装}
+\subsection{前期准备}
+在\textrm{Linux}系统中先安装好\textrm{gfortrant}，\textrm{g++}等编译器， 可以利用命令\textrm{<whereis gfortrant>}查看\textrm{Linux}系统中是否安装好了编译器
+
+\subsection{\rm{fftw}安装}
+
+\subsection{串行安装}
+\subsubsection{主模块安装}
+先到\textrm{STUBS}目录编译静态库
+\begin{itemize}
+	\item \textrm{cd~STUBS/}
+	\item \textrm{make~clean}
+	\item \textrm{make}
+	\item \textrm{make all}
+\end{itemize}
+进到\textrm{src}目录下输入\textrm{make}查看\textrm{make}选项，检查安装包
+\begin{itemize}
+	\item \textrm{make~package-status}~ \# 查看安装包的情况
+	\item \textrm{make yes-all}
+	\item \textrm{make yes-Name\_of\_Package}~ \#<某个包>
+	\item \textrm{make no-all}
+	\item \textrm{make no-Name\_of\_Package}~ \#<某个包>
+\end{itemize}
+通过以上命令来选择需要的包，在安装某个包的时候，最好看下官方文档，查看这个包有什么作用。有些包需要先在\textrm{lammps/lib}目录下编译好，才能被安装成功
+
+修改\textrm{src/MAKE}目录下得\textrm{Makefile.serial}文件，串行\textrm{lammps}只要修改如下几行:
+\begin{itemize}
+	\item \textrm{FFT\_INC = -DFFT\_FFTW3 -I/<fftw的安装路径>/include}
+	\item \textrm{FFT\_PATH = -L/<fftw的安装路径>/lib}
+	\item \textrm{ FFT\_LIB = -lfftw3}
+\end{itemize}
+\textrm{Makefile}文件中一些参数输入修改可以参考\textrm{src/MAKE}目录中\textrm{MACHINES}和\textrm{OPTIONS}目录里的文件。
+
+回到\textrm{src}目录，输入\textrm{make~serial}即可开始安装
+
+\subsubsection{并行版安装}
+与串行版类似，只是多了指定\textrm{mpi}编译器的内容
+
+\subsection{配套可视化工具VMD的安装}
+\textrm{VMD}需要的工具(\textrm{csh})和库函数(\textrm{libstdc++5})
+\begin{itemize}
+	\item 下载\textrm{VMD}软件~\textrm{（\url{http://www.ks.uiuc.edu/Research/vmd/}）}\\
+		或命令:~\textrm{wget~http://www.ks.uiuc.edu/Research/vmd/vmd-1.9.3/files/final/vmd-1.9.3.bin.LINUXAMD64-CUDA8-OptiX4-OSPRay111p1.opengl.tar.gz}
+	\item 解压
+	\item 如果必要可以修改\textrm{configure}中的两个参数\\
+		\textrm{\$install\_bin\_dir}(默认为\textrm{/usr/local/bin})和\textrm{\$install\_library\_dir}(默认为\textrm{/usr/local/lib/\$install\_name})
+	\item 运行命令\textrm{sudo ./configure LINUXAMD64}
+	\item 运行命令\textrm{sudo ./configure}
+	\item 进入目录\textrm{src}，运行\textrm{sudo~make~install}
+\end{itemize}
 
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
