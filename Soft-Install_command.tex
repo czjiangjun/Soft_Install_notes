@@ -417,7 +417,6 @@ rm -rf \$WIEN2K\_RUNDIR \\
 \subsection{\rm{fftw}安装}
 
 \subsection{串行安装}
-\subsubsection{主模块安装}
 先到\textrm{STUBS}目录编译静态库
 \begin{itemize}
 	\item \textrm{cd~STUBS/}
@@ -425,6 +424,8 @@ rm -rf \$WIEN2K\_RUNDIR \\
 	\item \textrm{make}
 	\item \textrm{make all}
 \end{itemize}
+
+\subsubsection{子模块检查与安装}
 进到\textrm{src}目录下输入\textrm{make}查看\textrm{make}选项，检查安装包
 \begin{itemize}
 	\item \textrm{make~package-status}~ \# 查看安装包的情况
@@ -435,6 +436,31 @@ rm -rf \$WIEN2K\_RUNDIR \\
 \end{itemize}
 通过以上命令来选择需要的包，在安装某个包的时候，最好看下官方文档，查看这个包有什么作用。有些包需要先在\textrm{lammps/lib}目录下编译好，才能被安装成功
 
+\textrm{lammps}包含了非常丰富的\textrm{packages}，大约有60多个，默认开启的是:~
+\begin{itemize}
+	\item \textrm{KSPACE}
+	\item \textrm{MANYBODY}
+	\item \textrm{MOLECULE}
+\end{itemize}
+
+其他的包，大致分为3类:~
+\begin{itemize}
+	\item 直接通过\textrm{make~yes}就能安装的包，如\textrm{ASPHERE}、\textrm{BODY}、\textrm{CLASS2}等。
+	\item 需要在\textrm{lammps/lib}文件夹下手动编译的包，如\textrm{atc}、\textrm{quip}、\textrm{reaxc}等\\
+		\textcolor{red}{比如执行\textrm{make -f Makefile.gfortran}}\\
+		\textcolor{blue}{必要时在编译主模块的\textrm{Makefile}文件中指定包的库函数链接}
+	\item 需要在\textrm{lammps/lib}文件夹下，额外下载源码安装，然后再链接的包，如\textrm{kim}、\textrm{voronoi}、\textrm{user-quip}等。
+\end{itemize}
+
+另外特别指出，还有一些功能可以支持，部分列举如下:~
+\begin{itemize}
+	\item \textrm{lammps}支持\textrm{GPU}，可以编译出\textrm{GPU}版本(需要\textrm{GPU}编译器)
+	\item 安装\textrm{jpeg/png}的库，并通过修改\textrm{lammps}的\textrm{Makefile}来支持
+	\item 修改\textrm{lammps}的\textrm{Makefile}的宏定义来支持\textrm{ffmpeg}
+	\item 修改\textrm{lammps}的\textrm{Makefile}的宏定义来编译出不同精度的\textrm{lammps}
+\end{itemize}
+
+\subsubsection{主模块安装}
 修改\textrm{src/MAKE}目录下得\textrm{Makefile.serial}文件，串行\textrm{lammps}只要修改如下几行:
 \begin{itemize}
 	\item \textrm{FFT\_INC = -DFFT\_FFTW3 -I/<fftw的安装路径>/include}
