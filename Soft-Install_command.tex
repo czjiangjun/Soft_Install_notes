@@ -202,15 +202,15 @@ make \&\& make install
 
 ./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=icc CXX=icpc CFLAGS=-fPIC} F77=ifort FC=ifort \textcolor{red}{-\/-enable-shared}\;\;\;\textcolor{violet}{仅出现动态库}
 
-./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=ifort MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi \textcolor{red}{-\/-enable-shared}
+./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=ifort MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi -\/-enable-openmp \textcolor{red}{-\/-enable-shared}
 
 如果要生成包含\textrm{\textcolor{red}{fftw3f/fftw3f\_mpi/\_thread}}等动态库，用如下的设置
 
-./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=mpif90 MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi \textcolor{red}{-\/-enable-shared }\textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
+./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=mpif90 MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi  -\/-enable-openmp \textcolor{red}{-\/-enable-shared }\textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
 
 如果用\textcolor{red}{\textrm{gcc/gfortran}}编译器编译
 
-./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=gcc MPICC=mpicc F77=gfortran FC=mpif90} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi \textcolor{red}{-\/-enable-shared} \textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
+./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=gcc MPICC=mpicc F77=gfortran FC=mpif90} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi  -\/-enable-openmp \textcolor{red}{-\/-enable-shared} \textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
 
 \section{库函数检查的有关命令}
 \textbf{nm}
