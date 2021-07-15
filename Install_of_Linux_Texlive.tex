@@ -303,8 +303,46 @@ Recompiling VirtualBox kernel modules ...failed!\\
 更新的时候升级了\textrm{Linux kernel}，所以\textrm{vboxdrv}需要重新编译。因为是从源里面直接更新的，没有Linux kernel的源文件，显然编译需要这些源文件，最后解决方法如下\\
 
 \textcolor{red}{\textrm{sudo apt-get install linux-headers-\$(uname -r)\\
-sudo apt-get install dkms\\
-sudo /etc/init.d/vboxdrv setup}}
+	\textrm{sudo apt-get install dkms}\\
+	\textrm{sudo /etc/init.d/vboxdrv setup}}}
+
+\section{\rm{Ubuntu}下的有线网络链接}
+有线宽带在\textrm{Windows}下可以正常连接，不过在\textrm{Ubuntu}下死活连不上，基本可以排除宽带线路问题和机器的网卡硬件问题，所以问题应该是出在\textrm{Ubuntu}系统设置或驱动上。解决方式:
+\begin{enumerate}
+	\item 启动\textrm{NetworkManager}:\\
+		\textrm{sudo vim /etc/NetworkManager/NetworkManager.conf} \\
+		\#修改managed=true
+	\item 重启服务\\
+		\textrm{sudo service network-manager restart}
+	\item \textrm{ifconfig}查看网卡 \\
+		\# 查看启用的网卡:~ \textrm{ifconfig}\\
+		\# 查看所有网卡:~\textrm{ ifconfig~-a}\\
+一般宽带使用的为\textrm{enp}开头的网卡（如:~\textrm{enp7s0}），如果网卡未启用，则通过\\
+\textrm{sudo ifconfig enp7s0 up}启用网卡(\textrm{down}为关闭)
+	\item 通过\textrm{nmcli}命令查看网卡状态，有没有被\textrm{network-manager}所管理:
+\begin{figure}[h!]
+\centering
+\includegraphics[height=3.35in,clip]{Figures/ubuntu_nmcli.jpg}
+%\caption{\small Band Structure of PbTe (a) and EuTe (b).}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{ubuntu_nmcli}
+\end{figure}
+\end{enumerate}
+
+如果\textrm{enp7s0}显示为未托管状态，则需要修改配置文件\\
+\# 备份原配置文件\\
+\textrm{sudo mv /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf  /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf\_origin}\\
+\# 新建新配置文件\\
+\textrm{sudo touch /usr/lib/NetworkManager/conf.d/10-globally-managed-devices.conf}\\
+修改后重启\textrm{networkmaneger}服务:\\
+\textrm{sudo service network-manager restart}\\
+再用\textrm{nmcli}命令查看，会发现\textrm{enp7s0}已经被\textrm{network-manager}所管理，在系统$\rightarrow$ 设置$\rightarrow$ 网络中发现，多出来了“有线”选项，表示可以联网了
+\begin{figure}[h!]
+\centering
+\includegraphics[height=2.35in,clip]{Figures/ubuntu_network.jpg}
+%\caption{\small Band Structure of PbTe (a) and EuTe (b).}%(与文献\cite{EPJB33-47_2003}图1对比)
+\label{ubuntu_network}
+\end{figure}
+
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
