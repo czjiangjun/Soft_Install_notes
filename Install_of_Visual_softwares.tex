@@ -47,6 +47,8 @@
 %						   %pdf书签的中文乱码问题		      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{verbatim}			%Verbatim 宏包重新实现了 Verbatim 环境，并且提供一个命令可以导入一个 ASCII 文件到文档中
+
 %%%%%%%%%%%%%%%%%%%%%  % EPS 图片支持  %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}                                            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,11 +193,13 @@
 
 \section{ffmpeg合并多个视频}
 \begin{itemize}
-	\item 安装:~\textrm{sudo apt-get install ffmpeg}
+	\item 安装:~\textrm{sudo apt-get install ffmpeg}\\
+		\textrm{ffmpeg}依赖的库主要有三个:~\textrm{yasm},~\textrm{sdl1.2}和\textrm{sdl2.0}\\
+		安装\textrm{yasm}:~\textrm{sudo~apt-get~install~yasm}\\
+		安装\textrm{sdl1.2}:~\textrm{sudo~apt-get~install~libsdl1.2-dev}\\
+		安装\textrm{yasm}:~\textrm{sudo~apt-get~install~libsdl2-dev}
 	\item 待合并的视频文件名写入文件\textrm{to\_be\_merged.txt}，文件内容:\\
-		\textrm{file 绝对路径\视频名-xx}\\
-		\textrm{file 绝对路径\视频名-yy}\\
-		\textrm{file 绝对路径\视频名-zz}
+		\textcolor{red}{\textbf{例如}}:\verbatiminput{/home/jun_jiang/Videos/探索发现_紫禁城/File_Video} %为保险:~选用文件名绝对路径
 	\item 运行命令:~\textcolor{red}{\textrm{ffmpeg -f concat -safe 0 -i to\_be\_merged.txt -c copy output.mp4}}即可
 \end{itemize}
 
