@@ -212,6 +212,12 @@ make \&\& make install
 
 ./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=gcc MPICC=mpicc F77=gfortran FC=mpif90} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi  -\/-enable-openmp \textcolor{red}{-\/-enable-shared} \textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
 
+如果用\textcolor{red}{\textrm{intelmpi}编译器编译}
+
+./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=icc F77=ifort MPICC=mpiicc} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-shared -\/-enable-static -\/-enable-sse -\/-enable-sse2 -\/-enable-avx -\/-enable-avx2 -\/-enable-fma -\/-enable-threads -\/-enable-openmp -\/-enable-mpi -\/-enable-float
+
+make -j2 \&\& make install
+
 \section{库函数检查的有关命令}
 \textbf{nm}
 
@@ -487,6 +493,43 @@ rm -rf \$WIEN2K\_RUNDIR \\
 	\item 进入目录\textrm{src}，运行\textrm{sudo~make~install}
 \end{itemize}
 
+\subsubsection{\rm{CMAKE}安装的设置(参考)}
+%-C (builddir)s/lammps-stable_29Oct2020/cmake/presets/all_off.cmake 
+-DCMAKE\_BUILD\_TYPE=Release -DBUILD\_SHARED\_LIBS=on -DPKG\_PYTHON=on \\
+-DBUILD\_LIB=on -DCMAKE\_INSTALL\_LIBDIR=\%(installdir)s/lib -DLAMMPS\_EXCEPTIONS=on \\
+-DCMAKE\_INSTALL\_PREFIX=\%(installdir)s \\
+-DPKG\_ASPHERE=on -DPKG\_BODY=on -DPKG\_CLASS2=on -DPKG\_COLLOID=on \\
+-DPKG\_CORESHELL=on -DPKG\_DIPOLE=on -DPKG\_GRANULAR=on -DPKG\_KSPACE=on \\
+-DPKG\_MANYBODY=on -DPKG\_MC=on -DPKG\_MISC=on -DPKG\_MOLECULE=on \\
+-DPKG\_MPIIO=on -DPKG\_OPT=on -DPKG\_PERI=on -DPKG\_POEMS=on \\
+-DPKG\_QEQ=on -DPKG\_REAX=on -DPKG\_REPLICA=on \\
+-DPKG\_RIGID=on -DPKG\_SHOCK=on -DPKG\_SNAP=on -DPKG\_SPIN=on -DPKG\_SRD=on \\
+-DPKG\_USER-ATC=on \\
+-DPKG\_USER-AWPMD=on -DPKG\_USER-BOCS=on -DPKG\_USER-CGDNA=on -DPKG\_USER-CGSDK=on \\
+-DPKG\_USER-COLVARS=on -DPKG\_USER-DIFFRACTION=on -DPKG\_USER-DPD=on \\
+-DPKG\_USER-DRUDE=on -DPKG\_USER-EFF=on -DPKG\_USER-FEP=on -DPKG\_USER-INTEL=on \\
+-DPKG\_USER-LB=on -DPKG\_USER-MANIFOLD=on -DPKG\_USER-MEAMC=on -DPKG\_USER-MESO=on \\
+-DPKG\_USER-MGPT=on -DPKG\_USER-MISC=on -DPKG\_USER-MOFFF=on\\
+-DPKG\_USER-OMP=yes -DPKG\_USER-PHONON=on -DPKG\_USER-PTM=on -DPKG\_USER-QTB=on \\
+-DPKG\_USER-REAXC=on -DPKG\_USER-SMTBQ=on -DPKG\_USER-SDPD=on -DPKG\_USER-SPH=on \\
+-DPKG\_USER-TALLY=on -DPKG\_USER-UEF=on \\
+-DPKG\_VORONOI=on -DVORO\_LIBRARY=\$EBROOTVOROPLUSPLUS/lib/libvoro++.a \\
+-DVORO\_INCLUDE\_DIR=\$EBROOTVOROPLUSPLUS/include/voro++ \\
+-DTBB\_LIBRARY=\$EBROOTTBB/tbb/lib/intel64/gcc4.8/libtbb.so \\
+-DTBB\_INCLUDE\_DIR=\$EBROOTTBB/tbb/include \\
+-DTBB\_MALLOC\_LIBRARY=\$EBROOTTBB/tbb/lib/intel64/gcc4.8/libtbbmalloc.so \\
+-DTBB\_MALLOC\_INCLUDE\_DIR=\$EBROOTTBB/tbb/include \\
+-DCMAKE\_PREFIX\_PATH=\$EBROOTGSL\_ROOT \\
+-DCMAKE\_C\_FLAGS="-I\$EBROOTTBB/tbb/include -qopenmp -qno-openmp-offload \$EBVARCFLAGS" \\
+-DCMAKE\_CXX\_FLAGS="-I\$EBROOTTBB/tbb/include -qopenmp -qno-openmp-offload \\
+-I\$EBROOTMKL/mkl/lib/intel64/ \$EBVARCXXFLAGS" \\
+-DCMAKE\_Fortran\_FLAGS="-I\$EBROOTTBB/tbb/include -qopenmp -qno-openmp-offload \$EBVARFCFLAGS" \\
+-DCMAKE\_CXX\_COMPILER=mpicxx -DCMAKE\_C\_COMPILER=mpicc -DPKG\_GPU=ON \\
+-DGPU\_API=cuda -DCUDA\_CUDA\_LIBRARY=\$EBROOTCUDA/lib64/stubs/libcuda.so \\
+-DGPU\_ARCH="-gencode arch=compute\_60,code=[sm\_60,compute\_60] \\
+-gencode arch=compute\_70,code=[sm\_70,compute\_70] \\
+-gencode arch=compute\_80,code=[sm\_80,compute\_80]" \\
+-DCMAKE\_EXE\_LINKER\_FLAGS="-L\$EBROOTIFORT/lib/intel64 -DINTEL\_ARCH=cpu
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
