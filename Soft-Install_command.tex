@@ -530,6 +530,31 @@ rm -rf \$WIEN2K\_RUNDIR \\
 -gencode arch=compute\_70,code=[sm\_70,compute\_70] \\
 -gencode arch=compute\_80,code=[sm\_80,compute\_80]" \\
 -DCMAKE\_EXE\_LINKER\_FLAGS="-L\$EBROOTIFORT/lib/intel64 -DINTEL\_ARCH=cpu
+
+\section{wine安装及使用}
+\begin{itemize}
+	\item 运行64位体系结构的系统需要启用32位体系结构:\\
+		\textrm{sudo~dpkg~-\/-add-architecture~i386}
+	\item 下载存储库密钥并将其添加到系统中:\\
+		\textrm{wget~-qO~-~\url{https://dl.winehq.org/wine-builds/winehq.key} | sudo~apt-key~add~-~}
+	\item 使用以下命令在系统中启用\textrm{Wine~apt}存储库:\\
+		\textrm{sudo~apt-add-repository~'deb~\url{https://dl.winehq.org/wine-builds/ubuntu/}~focal main'}
+	\item 在\textrm{Ubuntu~20.04}上安装\textrm{Wine}:\\
+		您的系统已准备好安装\textrm{Wine}。使用以下命令从\textrm{apt}信息库安装\textrm{Wine}软件包。该\textrm{-\/-install-recommends}选项将在您的\textrm{Ubuntu~20.04}系统上安装\textrm{winehq}稳定版本的所有推荐软件包\\
+		\textrm{sudo~apt-get~update}\\
+		\textrm{sudo~apt~install~-\/-install-recommends~winehq-stable}\\
+		在任何情况下，您在安装过程中都会遇到未满足依赖性的错误，请使用以下命令在\textrm{Ubuntu}上使用\textrm{aptitude}安装\textrm{wine}\\
+		\textrm{sudo~apt~install~aptitude}\\
+		\textrm{sudo~aptitude~install~winehq-stable}\\
+		这将在\textrm{Ubuntu~20.04}系统上安装Wine和所有需要的软件包\\
+	\item 测试\textrm{Wine}版本\\
+		在您的\textrm{Ubuntu}系统上，\textrm{Wine}的安装已经成功完成。使用以下命令检查您系统上安装的\textrm{Wine}版本:\\
+		\textrm{wine -\/-version}
+	\item \textrm{Wine}的使用\\
+		要使用\textrm{Wine}，我们需要登录到\textrm{Ubuntu}系统的\textrm{GUI}桌面。然后在你的系统上下载一个像\textrm{PuTTY}这样的\textrm{windows .exe}文件，然后用\textrm{Wine}打开它，或者使用以下命令:\\
+		\textrm{wine~putty.exe}
+		你也可以通过右键点击应用程序，然后点击打开\textrm{Wine~Windows}程序来启动。
+\end{itemize}
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
