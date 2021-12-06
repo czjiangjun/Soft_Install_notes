@@ -75,3 +75,9 @@ deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted unive
 deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
 deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse
 deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
+deb https://dl.winehq.org/wine-builds/ubuntu/ xenial main
+# deb-src https://dl.winehq.org/wine-builds/ubuntu/ xenial main
+deb https://dl.winehq.org/wine-builds/ubuntu/ focal main
+# deb-src https://dl.winehq.org/wine-builds/ubuntu/ focal main
+deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main
+# deb-src https://dl.winehq.org/wine-builds/ubuntu/ bionic main
