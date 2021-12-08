@@ -531,12 +531,12 @@ rm -rf \$WIEN2K\_RUNDIR \\
 -gencode arch=compute\_80,code=[sm\_80,compute\_80]" \\
 -DCMAKE\_EXE\_LINKER\_FLAGS="-L\$EBROOTIFORT/lib/intel64 -DINTEL\_ARCH=cpu
 
-\section{wine安装及使用}
+\section{\rm{wine}安装及使用}
 \begin{itemize}
 	\item 运行64位体系结构的系统需要启用32位体系结构:\\
 		\textrm{sudo~dpkg~-\/-add-architecture~i386}
 	\item 下载存储库密钥并将其添加到系统中:\\
-		\textrm{wget~-qO~-~\url{https://dl.winehq.org/wine-builds/winehq.key} | sudo~apt-key~add~-~}
+		\textrm{wget~-qO~-~\url{https://dl.winehq.org/wine-builds/winehq.key}~|~sudo~apt-key~add~-~}
 	\item 使用以下命令在系统中启用\textrm{Wine~apt}存储库:\\
 		\textrm{sudo~apt-add-repository~'deb~\url{https://dl.winehq.org/wine-builds/ubuntu/}~focal main'}
 	\item 在\textrm{Ubuntu~20.04}上安装\textrm{Wine}:\\
@@ -554,6 +554,18 @@ rm -rf \$WIEN2K\_RUNDIR \\
 		要使用\textrm{Wine}，我们需要登录到\textrm{Ubuntu}系统的\textrm{GUI}桌面。然后在你的系统上下载一个像\textrm{PuTTY}这样的\textrm{windows .exe}文件，然后用\textrm{Wine}打开它，或者使用以下命令:\\
 		\textrm{wine~putty.exe}
 		你也可以通过右键点击应用程序，然后点击打开\textrm{Wine~Windows}程序来启动。
+\end{itemize}
+
+\section{\rm{forti~VPN~client}的安装}
+\begin{itemize}
+	\item 要从\textrm{Fortinet~Ubuntu}存储库安装\textrm{Fortinet~VPN}，首先需要安装存储库\textrm{GPG}签名密钥:\\
+		\textrm{wget~-O~-~\url{https://repo.fortinet.com/repo/ubuntu/DEB-GPG-KEY}~|~sudo~apt-key~add~-~}
+	\item 创建\textrm{Fortinet~Ubuntu}存储库:\\ 
+		\textrm{echo~"deb~[arch=amd64]~\url{https://repo.fortinet.com/repo/ubuntu/}~/bionic multiverse"~|~sudo~tee~/etc/apt/sources.list.d/fortinet.list}
+	\item 更新软件包存储库:\\
+		\textrm{apt update}
+	\item 检查可用版本:\\
+		\textrm{apt-cache~policy~forticlient}
 \end{itemize}
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
