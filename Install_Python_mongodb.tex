@@ -148,11 +148,6 @@ gfortran -fPIC -m64 -shared libblas.a -o libblas.so\\
 
 参见文档\textcolor{red}{\textrm{ATLAS\_Numpy\_Scipy\_Theano}的环境搭建.pdf}
 
-
-\textbf{python的源码包安装配置}\\
-./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-2.7.11  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so'\\
-make \&\& make install
-
 \fbox{
 	\parbox{\textwidth}{
 \textrm{python build finished successfully!\\
@@ -177,6 +172,19 @@ _ctypes                         \\
 Could not build the ssl module!\\
 Python requires an OpenSSL 1.0.2 or 1.1 compatible libssl with X509\_VERIFY\_PARAM\_set1_host().\\
 LibreSSL 2.6.4 and earlier do not provide the necessary APIs, https://github.com/libressl-portable/portable/issues/381}}}
+
+需要安装的库函数:
+\fbox{
+	\parbox{\textwidth}{
+		\textrm{
+yum -y groupinstall "Development tools" \\
+yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel \\
+yum install -y libffi-devel zlib1g-dev \\
+yum install zlib* -y}}}
+
+\textbf{python的源码包安装配置}\\
+./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-2.7.11  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so'\\
+make \&\& make install
 
 \textbf{setuptools安装} (参见文档 \textcolor{blue}{\textrm{Python}的安装过程(含\textrm{setuptools}).pdf})\\
 python setup.py build\\
@@ -328,6 +336,26 @@ export LAPACK=/usr/lib/liblapack.so\\
 在此基础上完成安装:\\
 pip install numpy\\
 pip install scipy\\
+
+\textbf{virtualenv}:~用来建立一个虚拟的\textrm{python}环境，一个专属于项目的\textrm{python}环境。
+用\textrm{virtualenv}来保持一个干净的环境非常有用
+\begin{enumerate}
+	\item 基本使用: 通过\textrm{pip}安装\textrm{virtualenv}:\\
+		\textrm{pip~install~virtualenv}
+	\item 测试安装:\\
+		\textrm{virtualenv~-\/-version}
+	\item 为一个工程项目搭建一个虚拟环境:\\
+		\textrm{cd~my\_project}\\
+		\textrm{virtualenv~my\_project_env}
+	\item 如果存在多个\textrm{python}解释器，可以选择指定一个\textrm{Python}解释器（比如``\textrm{python2.7}``），没有指定则由系统默认的解释器来搭建:\\
+		\textrm{virtualenv~-p~/usr/bin/python2.7~my\_project\_env}\\
+		将会在当前的目录中创建一个名为\textrm{my\_project\_env}的文件夹，这是一个独立的\textrm{python}运行环境，包含了\textrm{Python}可执行文件， 以及~\textrm{pip}~ 库的一份拷贝，这样就能安装其他包了，不过已经安装到系统\textrm{Python}环境中的所有第三方包都不会复制过来，这样就得到了一个不带任何第三方包的“干净”的\textrm{Python}运行环境来。
+	\item 要开始使用虚拟环境，其需要被激活:\\
+		\textrm{source~my\_project\_env/bin/activate}
+	\item 停用虚拟环境:\\
+		\textrm{deactivate}\\
+		停用后将回到系统默认的\textrm{Python}解释器
+\end{enumerate}
 
 \section{关于\textrm{MongoDB}的启动}
 \textrm{MongoDB}可以通过控制文件(如文件名为\textrm{mongodb.config})来控制启动，\textrm{mongodb.config}中指定各种参数:\\
