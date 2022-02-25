@@ -153,6 +153,30 @@ gfortran -fPIC -m64 -shared libblas.a -o libblas.so\\
 ./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-2.7.11  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so'\\
 make \&\& make install
 
+\fbox{
+	\parbox{\textwidth}{
+\textrm{python build finished successfully!\\
+The necessary bits to build these optional modules were not found:\\
+_bz2                  _curses               _curses_panel      \\
+_dbm                  _gdbm                 _hashlib           \\
+_lzma                 _sqlite3              _ssl               \\
+_tkinter              readline                                 \\
+To find the necessary bits, look in setup.py in detect_modules() for the module's name.\\
+\\
+\\
+The following modules found by detect_modules() in setup.py, have been\\
+built by the Makefile instead, as configured by the Setup files:\\
+_abc                  atexit                pwd                \\
+time                                                           \\
+\\
+\\
+Failed to build these modules:\\
+_ctypes                         \\                               
+\\
+\\
+Could not build the ssl module!\\
+Python requires an OpenSSL 1.0.2 or 1.1 compatible libssl with X509\_VERIFY\_PARAM\_set1_host().\\
+LibreSSL 2.6.4 and earlier do not provide the necessary APIs, https://github.com/libressl-portable/portable/issues/381}}}
 
 \textbf{setuptools安装} (参见文档 \textcolor{blue}{\textrm{Python}的安装过程(含\textrm{setuptools}).pdf})\\
 python setup.py build\\
@@ -212,7 +236,7 @@ trusted-host = \url{pypi.douban.com} \\
 	\item \textrm{echo~``/usr/local/openssl-xxx/lib''~>>~/etc/ld.so.conf}
 	\item \textrm{ldconfig -v}
 \end{itemize}
-重新编译和安装\textrm{Python}，记得修改\textrm{Module/Setup}文件:~
+重新编译和安装\textrm{Python}，用选项\textrm{-\/-with-openssl=\$openssl~}的安装目录，在\textrm{Ubuntu}下记得修改\textrm{Module/Setup}文件:~
 \begin{itemize}
 	\item \textrm{vim~/root/Python-XXXX/Modules/Setup}
 	\item 修改结果如下:\\
