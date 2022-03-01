@@ -186,6 +186,10 @@ yum install zlib* -y}}}
 ./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-2.7.11  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so'\\
 make \&\& make install
 
+\textbf{类似地，python3的源码包安装配置}\\
+./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-3.9.5  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so' -\/-LDFLAGS='-L/usr/local/lib" CPPFLAGS="-I/usr/local/include' -\/-with-openssl=/home/TEST/.local/openssl \\
+make \&\& make install
+
 \textbf{setuptools安装} (参见文档 \textcolor{blue}{\textrm{Python}的安装过程(含\textrm{setuptools}).pdf})\\
 python setup.py build\\
 python setup.py install
@@ -407,8 +411,112 @@ port = 27017}}}
 \textrm{pmg~config~add~PMG\_VASP\_PSP\_DIR ~Dir-object} \\
 生效即可
 
-\textrm{pmg~potcar}命令是用于根据\textrm{POTCAR}库产生对应元素的\textrm{POTCAR}
+\textrm{pmg~potcar}命令是用于根据\textrm{POTCAR}库产生对应元素的\textrm{POTCAR}，在\textrm{ATOMATE}系统中，\textrm{~DIR-object}必须是\[\textrm{POT\_GGA\_PAW\_PBE},\textrm{POT\_LDA\_PAW}\]
 
+\section{\rm{ATOMATE}下的数据库配置}
+启动支持计算进程的\textrm{FireWorks}数据库:\\
+\textrm{mongod~-f~./mongodb\_fireworks.config}
+
+启动支持计算数据存储的\textrm{Atomate}数据库:\\
+\textrm{mongod~-f~./mongodb\_atomate.config.config}
+
+\begin{itemize}
+	\item \textrm{ATOMATE}环境下，加载\textrm{FireWorks}的总体配置:\textrm{~/.bashrc}中写入环境变量:\\
+		\textrm{export FW\_CONFIG\_FILE=<<INSTALL\_DIR>>/config/FW\_config.yaml}\\
+		\textrm{FW\_config.yaml}的内容:\\
+\fbox{
+	\parbox{\textwidth}{
+		\textrm{LAUNCHPAD\_LOC:~/home/TEST/WORKS/FireWorks\_TEST/my\_launchpad.yaml}\\
+		\textrm{FWORKER\_LOC:~/home/TEST/WORKS/FireWorks\_TEST/my\_fworker.yaml} \\
+		\textrm{QUEUEADAPTER\_LOC:~/home/TEST/WORKS/FireWorks\_TEST/my\_qadapter.yaml} \\
+		\textrm{CONFIG\_FILE\_DIR:~/home/TEST/WORKS/FireWorks\_TEST}}}
+	\item  文件\textrm{my\_launchpad.yam}~指定了\textrm{FireWorks}支持的计算流程存储的数据库的(相关登录)信息，~\textcolor{red}{(这个文件指定的参数一般不要改动)}\\
+\fbox{
+	\parbox{\textwidth}{
+		\textrm{authsource:~fireworks}~\#指定支持计算流程的数据库为\textrm{FireWorks}\\
+		\textrm{host:~localhost}~\#指定\textrm{IP}或域名\\
+		\textrm{logdir:~null}\\
+		\textrm{mongoclient\_kwargs:~\{\}}\\
+		\textrm{name:~fireworks}~\#指定数据库登录账号为~\textrm{FireWorks}\\
+		\textrm{password:~null} ~\#指定数据库登录密码\\
+		\textrm{port:~27017} ~\#指定数据库端口\\
+		\textrm{ssl:~false} ~\#默认为\textrm{false}，以下全部空;\textrm{true}，以下填入合适的参数\\
+		\textrm{ssl\_ca\_certs:~null}\\
+		\textrm{ssl\_certfile:~null}\\
+		\textrm{ssl\_keyfile:~null}\\
+		\textrm{ssl\_pem\_passphrase:~null}\\
+		\textrm{strm\_lvl:~INFO}\\
+		\textrm{uri\_mode:~false}\\
+		\textrm{user\_indices:~[~]}\\
+		\textrm{username:~null}\\
+		\textrm{wf\_user\_indices:~[~]}}}
+	\item 文件\textrm{my\_fworker.yaml}~指定了运行所需计算软件、计算数据存储数据位置信息\\
+\fbox{
+	\parbox{\textwidth}{
+		\textrm{name:~mgo-test}~\#指定计算对象(任务)的名称\\
+		\textrm{category:~''}\\
+		\textrm{query:~'\{\}'}\\
+		\textrm{env:}\\
+		\hspace*{25pt}\textrm{db\_file:~/home/TEST/WORKS/Mongo\_TEST/Cal\_Data\_Base/db.json}~\#指定计算数据存储用数据库的位置，\textrm{db.json}文件包含计算存储数据库的信息\\
+		\hspace*{25pt}\textrm{vasp\_cmd:~mpirun~-np~4~/home/TEST/Softwares/vasp.5.4.4/bin/vasp\_std}~\#指定核心计算所需的引擎\\
+		\hspace*{25pt}\textrm{scratch\_dir:~null}}}
+	\item 文件\textrm{my\_qadapter.yaml}~\# 这个文件指定了作业管理系统支持下提交计算作业的参数和形式，~\textcolor{blue}{这个文件是支持\textrm{qlaunch~rapidfire~\[-m~3\]}}命令的运行，类似于直接启动\\
+		\textrm{rlaunch~-l~/home/TEST/WORKS/FireWorks\_TEST/my\_launchpad.yaml~-w~/home/TEST/WORKS/FireWorks\_TEST/my\_fworker.yaml~rapidfire}\\
+\fbox{
+	\parbox{\textwidth}{
+		\textrm{\_fw\_name:~CommonAdapter}\\
+		\textrm{\#~\_fw\_q\_type:~PBS~\#~SLURM}\\
+		\textrm{\_fw\_q\_type:~LoadSharingFacility}\\
+		\textrm{\#~\_fw\_template\_file:~/share/home/czjiangjun/WORKS/TEST\_ATOMATE/LSF\_template\_custom.txt}
+		\textrm{rocket\_launch:~rlaunch~-w~/home/jun-jiang/WORKS/FireWorks/my\_fworker.yaml~-l~/home/jun-iang/WORKS/FireWorks/my\_launchpad.yaml~rapidfire~#~singleshot} \#~本行指定的就是每个进程命令\\ 
+		\textrm{\#~rocket\_launch:~rlaunch~-c~/share/home/czjiangjun/WORKS/TEST\_FireWorks~singleshot~#rapidfire}\\
+		\textrm{\#~rocket\_launch:~rlaunch~-c~/share/home/czjiangjun/WORKS/TEST\_FireWorks~singleshot}\\ 
+		\textrm{\#~rocket\_launch:~bsub ~~./stand.lsf}
+		\textrm{nodes:~4}\\
+		\textrm{ntasks\_per\_node:~2}\\
+		\textrm{\#~walltime:~24:00:00}\\
+		\textrm{queue:~para2}\\
+		\textrm{\#~account:~czjiangjun}\\
+		\textrm{job\_name:~VASP\_Cal}\\
+		\textrm{pre\_rocket:~null}\\
+		\textrm{post\_rocket:~null}\\
+		\# 以下是针对本单位\textrm{LSF}的改动脚本:\\
+		\textrm{\#~NP\_PER\_NODE:~12 \#~(一个节点跑\textrm{n}个进程，不指定系统按照资源使用情况自主决定)}\\
+		\textrm{MPI\_TYPE:~openmpi ~\#~(选择mpi的类型)}\\
+		\textrm{MPI\_HOME:~/home/jun-jiang/Softswares/openmpi-1.8.4 ~\#~(\textrm{mpi}的路径)}\\
+		\textrm{RUN:~RAW}\\
+		\textrm{\#~OMP\_NUM\_THREADS=4 ~~\#(如果使用\textrm{OpenMP}或者是单节点启动多个进程，需要通过该参数修正资源的分配，该值表示一个进程中运行了4个线程)}\\
+		\textrm{\_q\_commands\_override:}\\
+		\hspace*{25pt}\textrm{submit\_cmd:~bsub}\\
+		\hspace*{25pt}\#~\textrm{submit\_cmd:~./}\\
+		\hspace*{25pt}\#~\textrm{status\_cmd:~bstatus}}}
+\end{itemize}
+
+计算结果数据库文件\textrm{db.json}\\
+\fbox{
+	\parbox{\textwidth}{
+\{\\
+	\hspace*{25pt}\textrm{"host":~"localhost",} ~\#指定计算结果数据库的\textrm{IP}或域名\\
+	\hspace*{25pt}\textrm{"port":~27018,}~\#指定计算结果数据库的端口\\
+	\hspace*{25pt}\textrm{"database":~"Cal\_Data",}~\#指定计算结果数据的数据库名\\
+	\hspace*{25pt}\textrm{"collection":~"tasks",}~\#\textrm{FireWorks}中的\textrm{FireTasks}\\ 
+	\hspace*{25pt}\textrm{"admin\_user":~"",}~\# 指定不同级别用户的账号和密码\\
+	\hspace*{25pt}\textrm{"admin\_password":~"",}\\
+	\hspace*{25pt}\textrm{"readonly\_user":~"", }\\
+	\hspace*{25pt}\textrm{"readonly\_password":~"",}\\
+	\hspace*{25pt}\textrm{"aliases":~\{\}}\\
+\}}}
+
+执行任务的步骤
+\begin{itemize}
+	\item 启动计算进程管理数据库、启动计算数据存储数据库
+	\item \textrm{lpad~reset} ~\#~清理以往进程 ~(如果是从头开始的进程)
+	\item \textrm{python3~mgo\_bandstructure.py} ~\#~启动全部计算进程的设置
+	\item \textrm{qlaunch~rapidfire~[~-m~3~] \#~有任务管理系统支持作业提交 ~/\\
+		rlaunch~-l~/home/TEST/WORKS/FireWorks\_TEST/my\_launchpad.yaml~-w~/home/TEST/WORKS/FireWorks\_TEST/my\_fworker.yaml~rapidfire} ~\#~单机提交作业\\ 
+		\#启动\textrm{FireWorks}支持的计算任务
+	\item \textrm{python3~mgo\_analysis.py}~\#~计算结果数据分析
+\end{itemize}
 
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
