@@ -1,0 +1,6 @@
+安装atompaw:
+
+找到 blas/lapack 库： locate libmkl_core.a
+
+configure命令选项设置，关键是lapacl/blas库的链接方式：
+./configure FC=ifort  CC=icc --prefix=/home/mzy/Softs/atompaw-4.0.0.1  --with-linalg-libs='-L/opt/intel/composer_xe_2013.0.079/mkl/lib/intel64 -lmkl_core -lmkl_intel_lp64 -lmkl_intel_thread -liomp5 '

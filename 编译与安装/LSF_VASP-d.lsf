@@ -1,0 +1,116 @@
+#!/bin/sh
+APP_NAME=intelw_exc
+NP=48
+NP_PER_NODE=12
+RUN="RAW"
+CURDIR=$PWD
+
+VASP=/home-yw/users/nsyw075_YYM/VASP/vasp.5.3/vasp
+source /home-yw/env/intel-12.1.sh
+source /home-yw/env/openmpi-1.4.5-intel.sh
+
+cd $CURDIR
+
+touch WAVECAR PCDAT IBZKPT XDATCAR OSZICAR CONTCAR CHG PROCAR OUTCAR EIGENVAL DOSCAR CHGCAR
+  sleep 10
+  
+  #start creating .nodelist
+  rm -rf $CURDIR/nodelist >& /dev/null
+  for i in `echo $LSB_HOSTS`
+  do
+      echo "$i" >> $CURDIR/nodelist
+  done
+  nodelist=$(cat $CURDIR/nodelist | uniq | awk '{print $1}' | tr '\n' ',')
+  
+  #
+  #
+  echo -n "start time  " > time
+  date >> time
+  mpirun -np $NP -machinefile $CURDIR/nodelist $VASP  &> vasp.out
+  echo -n "end   time  " >> time ; date >> time
+  cat time >> vasp.out
+
+cd ../static
+cp ../relax/CONTCAR POSCAR
+cp ../relax/POTCAR POTCAR
+cp ../relax/KPOINTS KPOINTS
+
+ touch WAVECAR PCDAT IBZKPT XDATCAR OSZICAR CONTCAR CHG PROCAR OUTCAR EIGENVAL DOSCAR CHGCAR
+ sleep 10
+  #start creating .nodelist
+    rm -rf $CURDIR/nodelist >& /dev/null
+    for i in `echo $LSB_HOSTS`
+    do
+        echo "$i" >> $CURDIR/nodelist
+    done
+    nodelist=$(cat $CURDIR/nodelist | uniq | awk '{print $1}' | tr '\n' ',')
+  
+  #
+  #
+  echo -n "start time  " > time
+  date >> time
+  mpirun -np $NP -machinefile $CURDIR/nodelist $VASP  &> vasp.out
+  echo -n "end   time  " >> time ; date >> time
+  cat time >> vasp.out
+
+cd ../dos
+cp ../static/CHGCAR CHGCAR
+cp ../static/CHG   CHG
+cp ../static/WAVECAR WAVECAR
+cp ../static/POTCAR POTCAR
+cp ../static/CONTCAR POSCAR
+cp ../relax/KPOINTS KPOINTS
+
+ touch WAVECAR PCDAT IBZKPT XDATCAR OSZICAR CONTCAR CHG PROCAR OUTCAR EIGENVAL DOSCAR CHGCAR
+ sleep 10
+ 
+ #start creating .nodelist
+ rm -rf $CURDIR/nodelist >& /dev/null
+ for i in `echo $LSB_HOSTS`
+ do
+     echo "$i" >> $CURDIR/nodelist
+ done
+ nodelist=$(cat $CURDIR/nodelist | uniq | awk '{print $1}' | tr '\n' ',')
+ 
+ #
+ #
+ echo -n "start time  " > time
+ date >> time
+ mpirun -np $NP -machinefile $CURDIR/nodelist $VASP  &> vasp.out
+ echo -n "end   time  " >> time ; date >> time
+ cat time >> vasp.out
+
+
+cd ../band
+cp ../static/CHG CHG
+cp ../static/CHGCAR CHGCAR
+cp ../static/WAVECAR WAVECAR
+cp ../static/POTCAR POTCAR
+cp ../static/CONTCAR POSCAR
+
+
+
+
+ touch WAVECAR PCDAT IBZKPT XDATCAR OSZICAR CONTCAR CHG PROCAR OUTCAR EIGENVAL DOSCAR CHGCAR
+ sleep 10
+
+ #start creating .nodelist
+ rm -rf $CURDIR/nodelist >& /dev/null
+ for i in `echo $LSB_HOSTS`
+ do
+     echo "$i" >> $CURDIR/nodelist
+ done
+ nodelist=$(cat $CURDIR/nodelist | uniq | awk '{print $1}' | tr '\n' ',')
+ 
+ #
+ #
+ echo -n "start time  " > time
+ date >> time
+ mpirun -np $NP -machinefile $CURDIR/nodelist $VASP  &> vasp.out
+ echo -n "end   time  " >> time ; date >> time
+ cat time >> vasp.out
+
+
+
+
+exit

@@ -1,0 +1,29 @@
+./configure FC=ifort  CC=icc --prefix=/home/mzy/Softs/atompaw-3.0.1.9  --with-linalg-libs='-L/opt/intel/composer_xe_2013.0.079/mkl/lib/intel64 -lmkl_core -lmkl_intel_lp64 -lmkl_intel_thread -liomp5 '
+make
+sudo make install
+
+make clean
+./configure FC=ifort  CC=icc --prefix=/home/mzy/Softs/atompaw-4.0.0.4  --with-linalg-libs='-L/opt/intel/composer_xe_2013.0.079/mkl/lib/intel64 -lmkl_core -lmkl_intel_lp64 -lmkl_intel_thread -liomp5 '
+make
+make install
+
+make clean
+export FC=ifort CC=icc MPI_FC=mpif90 MPI_CC=mpicc MPI_CXX=mpic++
+./configure --prefix=/home/mzy/Softs/abinit-7.4.2
+./configure --prefix=/home/mzy/Softs/abinit-7.4.2 -enable-mpi
+./configure --prefix=/home/mzy/Softs/abinit-7.4.2 --enable-mpi
+./configure --prefix=/home/mzy/Softs/abinit-7.4.2 --with-mpi-prefix=/home/mzy/Softs/mpich2
+./configure --prefix=/home/mzy/Softs/abinit-7.4.2 --with-mpi-prefix=/home/mzy/Softs/mpich2 --with-dft-flavor=atompaw
+./configure --prefix=/home/mzy/Softs/abinit-7.4.2 --with-mpi-prefix=/home/mzy/Softs/mpich2
+make && make install
+
+
+所有
+--with-tardir=*.tar.gz目录存放位置
+make clean
+./configure --prefix=/share/home/cloud06/Softs/ABINIT CC=icc CXX=icpc FC=ifort MPI_FC=mpif90 MPI_CC=mpicc MPI_CXX=mpic++ --with-mpi-prefix=/share/software/MPI/openmpi-1.4.5 --enable-mpi --with-tardir=/share/home/cloud06
+vim Makefile
+make && make install
+
+./configure --prefix=/share/home/cloud06/Softs/ABINIT CC=icc CXX=icpc FC=ifort MPI_FC=mpif90 MPI_CC=mpicc MPI_CXX=mpic++ --with-mpi-prefix=/share/software/MPI/openmpi-1.4.5 --enable-mpi --enable-64bit-flags --with-linalg-libs="-L/share/intel2013/composer_xe_2013.1.117/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_core -lmkl_intel_lp64 -lmkl_sequential" --with-tardir=/share/home/cloud06
+make && make install

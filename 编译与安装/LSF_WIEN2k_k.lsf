@@ -1,0 +1,58 @@
+#!/bin/sh
+APP_NAME=intelw_exc
+NP=24
+NP_PER_NODE=12
+RUN="RAW"
+CURDIR=$PWD
+
+#VASP=/home-yw/users/nscc1034_LHHYW/bin/vasp5.3
+WIEN2k_run="/home-yw/users/nsyw126/WIEN2k_14.2/run_lapw -i 40 -cc 0.0001"
+source /lsfhome/env/intel-12.1.sh
+source /lsfhome/env/openmpi-1.6.5-intel.sh
+
+
+cd $CURDIR
+
+# for a in 1 2 3
+ # do 
+ #rm CHG CHGCAR
+ # cp INCAR.$a INCAR
+ # cp CONTCAR POSCAR
+  sleep 10
+  
+  #start creating .nodelist
+#  rm -rf $CURDIR/nodelist >& /dev/null
+  cat > $CURDIR/.machines << EOF
+# This is a valid .machines file
+#
+granularity:1
+EOF
+
+#start creating .nodelist
+#  rm -rf $CURDIR/nodelist >& /dev/null
+  for i in `echo $LSB_HOSTS`
+  do
+      echo "1:"$i >> $CURDIR/.machines
+  done
+  echo "lapw0:" `echo $LSB_HOSTS |cut -d " " -f1`  >> $CURDIR/.machines
+  echo "extrafine:1" >> $CURDIR/.machines
+
+
+ # nodelist=$(cat $CURDIR/nodelist | uniq | awk '{print $1}' | tr '\n' ',')
+
+  #
+  #
+ 
+  #
+  #
+  echo -n "start time  " > time
+  date >> time
+#  mpirun -np $NP -machinefile $CURDIR/nodelist $VASP  &> vasp.out
+  $WIEN2k_run -p &> WIEN2k.out 
+  echo -n "end   time  " >> time 
+  date >> time
+  cat time >> WIEN2k.out
+
+# done
+
+ exit 0

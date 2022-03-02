@@ -1,0 +1,12 @@
+./configure --prefix=/vol-th/home/gscomp-lhh/software/espresso-5.1.2 FC=ifort CC=icc MPIF90=/vol-th/home/gscomp-lhh/software/openmpi-1.8.4/bin/mpif90 F77=ifort F90=ifort FFT_LIBS=-L/vol-th/home/gscomp-lhh/software/fftw-3.3.4/lib MPI_LIBS=-L/opt/intel/composer_xe_2013.0.079/mpirt/lib/intel64 && make all
+
+
+./configure \
+BLAS_LIBS="-Wl,--start-group /opt/intel/mkl/lib/intel64/libmkl_intel_lp64.a \
+/opt/intel/mkl/lib/intel64/libmkl_sequential.a \
+/opt/intel/mkl/lib/intel64/libmkl_core.a -Wl,--end-group" \
+SCALAPACK_LIBS="-Wl,--start-group /opt/intel/mkl/lib/intel64/libmkl_scalapack_lp64.a \
+/opt/intel/mkl/lib/intel64/libmkl_blacs_intelmpi_lp64.a -Wl,--end-group" \
+FFT_LIBS="$HOME/lib/fftw-3.3.3/lib/libfftw3.a"
+这是基于intelmpi的。如果基于openmpi，最后是libmkl_blacs_openmpi_lp64.a
+

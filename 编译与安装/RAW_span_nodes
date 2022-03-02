@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#LSB_MCPU_HOSTS="host1 15 host2 15"
+hostname_numneedcores=($LSB_MCPU_HOSTS)
+host_num_total=$((${#hostname_numneedcores[*]}/2))
+core_num_totl=0
+j=1
+for((i=0;i<${#hostname_numneedcores[*]};i=i+2))
+do
+	core_num_total=$(($core_num_total + ${hostname_numneedcores[$((i + 1))]}))
+	if [ $i = 0 ]
+	then
+	hostnamelist=${hostname_numneedcores[$i]}
+	else
+	hostnamelist=$hostnamelist","${hostname_numneedcores[$i]}
+	fi
+	j=$((j+1))
+done
+CMD="mpirun --bind-to-core -np "$core_num_total" -H "$hostnamelist" ./vasp"
+$CMD
