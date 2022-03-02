@@ -492,7 +492,7 @@ port = 27017}}}
 		\hspace*{25pt}\#~\textrm{status\_cmd:~bstatus}}}
 \end{itemize}
 
-计算结果数据库文件\textrm{db.json}\\
+计算结果数据库配置文件\textrm{db.json}\\
 \fbox{
 	\parbox{\textwidth}{
 \{\\
@@ -506,6 +506,11 @@ port = 27017}}}
 	\hspace*{25pt}\textrm{"readonly\_password":~"",}\\
 	\hspace*{25pt}\textrm{"aliases":~\{\}}\\
 \}}}
+计算结果数据库配置文件\textrm{db.json}是关联
+\begin{enumerate}
+	\item 计算过程(通过文件\textcolor{blue}{\textrm{my\_fworker.yaml}})，确保\textrm{FireWorks}支持的计算流程结果流向数据库\textrm{db.json}
+	\item 计算结果(通过文件\textcolor{blue}{\textrm{mgo\_analysis.py}})，\textrm{Pymatgen}从\textrm{db.json}数据库提取数据，完成可执行的结果分析
+\end{enumerate}
 
 执行任务的步骤
 \begin{itemize}
