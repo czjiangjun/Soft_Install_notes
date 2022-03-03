@@ -1,0 +1,58 @@
+#!!!!!!! Intel_MPI 无效，建议用 MPICH !!!!!!
+# installation location
+# prefix=$HOME/local
+prefix=/home/TEST/Softwares/ABINIT-9.6.2 
+
+# MPI settings
+# with_mpi="yes"
+# enable_mpi_io="yes"
+
+with_mpi="yes" 
+enable_mpi_io="yes" 
+
+enable_openmp="yes"
+
+# linear algebra settings
+# with_linalg_flavor="mkl"
+# LINALG_CPPFLAGS="-I${MKLROOT}/include"
+# LINALG_FCFLAGS="-I${MKLROOT}/include"
+# LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group  -lmkl_gf_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group"
+
+with_linalg_flavor="mkl" 
+LINALG_CPPFLAGS="-I${MKLROOT}/include" 
+LINALG_FCFLAGS="-I${MKLROOT}/include" 
+LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group -mkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group" 
+
+# mandatory libraries
+# with_hdf5="yes"
+# with_netcdf="yes"
+# with_netcdf_fortran="yes"
+# with_libxc="yes"
+
+H5CC = mpicc
+with_hdf5="yes" 
+HDF5_CPPFLAGS="-I/usr/include/mpich-x86_64" 
+HDF5_FCFLAGS="-I/usr/include/mpich-x86_64" 
+HDF5_LIBS="-L/usr/lib64 -L/usr/lib64/mpich/lib -lhdf5 -hdf5_fortran" 
+
+with_netcdf="yes"
+with_netcdf_fortran="yes"
+NETCDF_CPPFLAGS="-I/usr/include/mpich-x86_64" 
+NETCDF_FCFLAGS="-I/usr/include/mpich-x86_64" 
+NETCDF_LIBS="-L/usr/lib64/mpich/lib -lnetcdf"
+ 
+with_libxc="yes" 
+LIBXC_CPPFLAGS="" 
+LIBXC_FCFLAGS="" 
+LIBXC_LIBS="-L/usr/lib64 -lxc" 
+
+# FFT flavor
+# with_fft_flavor="dfti"
+# FFT_FCFLAGS="-I${MKLROOT}/include"
+
+with_fftw_flavor="dfti" 
+FFT_FCFLAGS="-I${MKLROOT}/include/fftw" 
+
+# Enable Netcdf mode in Abinit (use netcdf as default I/O library)
+# enable_netcdf_default="yes"
+enable_netcdf_default="yes"
