@@ -1,16 +1,18 @@
-#!!!!!!! Intel_MPI 无效，建议用 MPICH !!!!!!
 # installation location
 # prefix=$HOME/local
-prefix=/home/TEST/Softwares/ABINIT-9.6.2 
+prefix="/home/TEST/Softwares/ABINIT-9.6.2"
 
+CC = "/home/TEST/.local/bin/mpicc"
+CXX = "/home/TEST/.local/bin/mpicxx"
+FC = "/home/TEST/.local/bin/mpif90"
+CFLAGS = "-I$HOME/.local/include "
+LDFLAGS = "-L$HOME/.local/lib -lmpich -lmpichxx -lmpi"
 # MPI settings
 # with_mpi="yes"
 # enable_mpi_io="yes"
 
 with_mpi="yes" 
 enable_mpi_io="yes" 
-
-enable_openmp="yes"
 
 # linear algebra settings
 # with_linalg_flavor="mkl"
@@ -21,7 +23,7 @@ enable_openmp="yes"
 with_linalg_flavor="mkl" 
 LINALG_CPPFLAGS="-I${MKLROOT}/include" 
 LINALG_FCFLAGS="-I${MKLROOT}/include" 
-LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group -mkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group" 
+LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group" 
 
 # mandatory libraries
 # with_hdf5="yes"
@@ -29,22 +31,22 @@ LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group -mkl_intel_lp64 -lmkl_se
 # with_netcdf_fortran="yes"
 # with_libxc="yes"
 
-H5CC = mpicc
-with_hdf5="$HDF5_PATH" 
-HDF5_CPPFLAGS="-I/usr/include/mpich-x86_64" 
-HDF5_FCFLAGS="-I/usr/include/mpich-x86_64" 
-HDF5_LIBS="-L/usr/lib64 -L/usr/lib64/mpich/lib -lhdf5 -hdf5_fortran" 
+H5CC = "/home/TEST/.local/bin/h5pcc"
+with_hdf5="yes" 
+HDF5_CPPFLAGS="-I/home/TEST/.local/include" 
+HDF5_FCFLAGS="-I/home/TEST/.local/include" 
+HDF5_LIBS="-L/home/TEST/.local/lib  -lhdf5 -lhdf5_hl" 
 
-with_netcdf="$NETCDF_PATH"
+with_netcdf="yes"
 with_netcdf_fortran="yes"
-NETCDF_CPPFLAGS="-I/usr/include/mpich-x86_64" 
-NETCDF_FCFLAGS="-I/usr/include/mpich-x86_64" 
-NETCDF_LIBS="-L/usr/lib64/mpich/lib -lnetcdf"
+NETCDF_CPPFLAGS="-I/home/TEST/.local/include" 
+NETCDF_FCFLAGS="-I/home/TEST/.local/include" 
+NETCDF_LIBS="-L/home/TEST/.local/lib -lnetcdf"
  
-with_libxc="$LIBXC_PATH" 
-LIBXC_CPPFLAGS="" 
-LIBXC_FCFLAGS="" 
-LIBXC_LIBS="-L/usr/lib64 -lxc" 
+with_libxc="yes" 
+LIBXC_CPPFLAGS="-I/home/TEST/.local/include" 
+LIBXC_FCFLAGS="-I/home/TEST/.local/include" 
+LIBXC_LIBS="-L/home/TEST/.local/lib -lxc -lxcf90" 
 
 # FFT flavor
 # with_fft_flavor="dfti"
