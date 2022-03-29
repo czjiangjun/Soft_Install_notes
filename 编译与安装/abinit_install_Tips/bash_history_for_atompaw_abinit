@@ -27,3 +27,5 @@ make && make install
 
 ./configure --prefix=/share/home/cloud06/Softs/ABINIT CC=icc CXX=icpc FC=ifort MPI_FC=mpif90 MPI_CC=mpicc MPI_CXX=mpic++ --with-mpi-prefix=/share/software/MPI/openmpi-1.4.5 --enable-mpi --enable-64bit-flags --with-linalg-libs="-L/share/intel2013/composer_xe_2013.1.117/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_core -lmkl_intel_lp64 -lmkl_sequential" --with-tardir=/share/home/cloud06
 make && make install
+
+!!! 注意 !!!  ABINIT 的版本更新特别快，注意编译器和支持库的版本一定要正确选择  !!!
