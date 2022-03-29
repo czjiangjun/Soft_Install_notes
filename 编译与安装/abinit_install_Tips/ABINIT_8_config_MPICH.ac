@@ -1,0 +1,79 @@
+# installation location
+# prefix=$HOME/local
+# !!!!! 注意  = 两边不能有空格   !!!!!
+#
+prefix="/share/abinit-8.10.3/build"
+#
+with_mpi="yes"
+# CC = "mpicc"
+# CXX = "mpicxx"
+# FC = "mpif90"
+CC="/share/Softwares/mpich-4.0.1/bin/mpicc"
+CXX="/share/Softwares/mpich-4.0.1/bin/mpic++"
+FC="/share/Softwares/mpich-4.0.1/bin/mpif90"
+with_mpi_incs="-I/share/Softwares/mpich-4.0.1/include "
+# with_mpi_incs = "-I/opt/intel/compilers_and_libraries_2020.1.217/linux/mpi/intel64/include "
+with_mpi_libs="-L/share/Softwares/mpich-4.0.1/lib -lmpich -lmpichcxx -lmpichf90 -lmpi"
+# with_mpi_libs = "-L/opt/intel/compilers_and_libraries_2020.1.217/linux/mpi/intel64/lib -lmpicxx -lmpifort "
+# MPI settings
+enable_mpi="yes" 
+enable_mpi_io="yes"
+
+enable_openmp="yes" 
+
+# linear algebra settings
+# with_linalg_flavor="mkl"
+# LINALG_CPPFLAGS="-I${MKLROOT}/include"
+# LINALG_FCFLAGS="-I${MKLROOT}/include"
+# LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group  -lmkl_gf_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group"
+
+with_linalg_flavor="mkl" 
+with_linalg_incs="-I${MKLROOT}/include" 
+# LINALG_CPPFLAGS="-I${MKLROOT}/include" 
+# LINALG_FCFLAGS="-I${MKLROOT}/include" 
+with_linalg_libs="-L${MKLROOT}/lib/intel64 -Wl,--start-group -lmkl_gf_lp64 -lmkl_sequential -lmkl_core -lmkl_scalapack_lp64 -Wl,--end-group" 
+# LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group -lmkl_gf_lp64 -lmkl_sequential -lmkl_core -lmkl_scalapack_lp64 -Wl,--end-group" 
+
+# mandatory libraries
+# with_hdf5="yes"
+# with_netcdf="yes"
+# with_netcdf_fortran="yes"
+# with_libxc="yes"
+
+with_hdf5="yes" 
+H5CC="/share/Softwares/hdf5-1.10.8/bin/h5pcc"
+with_hdf5_incs="-I/share/Softwares/hdf5-1.10.8/include" 
+# HDF5_CPPFLAGS="-I/share/Softwares/hdf5-1.10.8/include" 
+# HDF5_FCFLAGS="-I/share/Softwares/hdf5-1.10.8/include" 
+with_hdf5_libs="-L/share/Softwares/hdf5-1.10.8/lib  -lhdf5 -lhdf5_hl" 
+# HDF5_LIBS="-L/share/Softwares/hdf5-1.10.8/lib  -lhdf5 -lhdf5_hl" 
+
+# with_trio_flavor="netcdf"
+enable_netcdf="yes"
+with_netcdf_fortran="yes"
+with_netcdf_incs="-I/share/Softwares/netcdf-c-4.7.3/include -I/share/Softwares/netcdf-fortran-4.5.2/include" 
+with_netcdf_libs="-L/share/Softwares/netcdf-c-4.7.3/lib -L/share/Softwares/netcdf-fortran-4.5.2/lib -lnetcdf -lh5bzip2 -lnetcdff"
+# NETCDF_CPPFLAGS="-I/share/Softwares/netcdf-c-4.7.3/include -I/share/Softwares/netcdf-fortran-4.5.2/include" 
+# NETCDF_FCFLAGS="-I/share/Softwares/netcdf-c-4.7.3/include -I/share/Softwares/netcdf-fortran-4.5.2/include" 
+# NETCDF_LIBS="-L/share/Softwares/netcdf-c-4.7.3/lib -lnetcdf -lnetdf -lh5bzip2 -L/share/Softwares/netcdf-fortran-4.5.2/lib -lnetcdff"
+ 
+enable_dft_flavor="libxc"
+enable_libxc="yes" 
+with_libxc_incs="-I/share/Softwares/libxc-4.3.4/include" 
+with_libxc_libs="-L/share/Softwares/libxc-4.3.4/lib -lxc -lxcf90" 
+# LIBXC_CPPFLAGS="-I/share/Softwares/libxc-4.3.4/include" 
+# LIBXC_FCFLAGS="-I/share/Softwares/libxc-4.3.4/include" 
+# LIBXC_LIBS="-L/share/Softwares/libxc-4.3.4/lib -lxc -lxcf90" 
+
+# FFT flavor
+# with_fft_flavor="dfti"
+# FFT_FCFLAGS="-I${MKLROOT}/include"
+
+enable_fftw_flavor="fftw3" 
+with_fftw_incs="-I${MKLOROOT}/include/fftw" 
+with_fftw_libs=${MKLROOT}/interfaces/fftw3xf/libfftw3xf_intel.a 
+
+# Enable Netcdf mode in Abinit (use netcdf as default I/O library)
+# enable_netcdf_default="yes"
+# enable_netcdf_default="yes"
+

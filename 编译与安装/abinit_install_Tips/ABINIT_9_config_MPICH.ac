@@ -1,12 +1,14 @@
 # installation location
 # prefix=$HOME/local
+# !!!!! 注意  = 两边不能有空格   !!!!!
+#
 prefix="/home/TEST/Softwares/ABINIT-9.6.2"
 
-CC = "/home/TEST/.local/bin/mpicc"
-CXX = "/home/TEST/.local/bin/mpicxx"
-FC = "/home/TEST/.local/bin/mpif90"
-CFLAGS = "-I$HOME/.local/include "
-LDFLAGS = "-L$HOME/.local/lib -lmpich -lmpichxx -lmpi"
+CC="/home/TEST/.local/bin/mpicc"
+CXX="/home/TEST/.local/bin/mpicxx"
+FC="/home/TEST/.local/bin/mpif90"
+CFLAGS="-I$HOME/.local/include "
+LDFLAGS="-L$HOME/.local/lib -lmpich -lmpichxx -lmpi"
 # MPI settings
 # with_mpi="yes"
 # enable_mpi_io="yes"
@@ -31,7 +33,7 @@ LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_s
 # with_netcdf_fortran="yes"
 # with_libxc="yes"
 
-H5CC = "/home/TEST/.local/bin/h5pcc"
+H5CC="/home/TEST/.local/bin/h5pcc"
 with_hdf5="yes" 
 HDF5_CPPFLAGS="-I/home/TEST/.local/include" 
 HDF5_FCFLAGS="-I/home/TEST/.local/include" 
