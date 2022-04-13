@@ -105,7 +105,7 @@ F90FLAGS       = $(FFLAGS) -cpp -fopenmp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $
 
 # compiler flags with and without optimization for fortran-77
 # the latter is NEEDED to properly compile dlamch.f, used by lapack
-FFLAGS         = -O3 -g -fopenmp -I/home/jun_jiang/Softs/fftw-3.3.4_gnu/include
+FFLAGS         = -O3 -g -fopenmp -ffpe-summary="none" -I/home/jun_jiang/Softs/fftw-3.3.4_gnu/include
 FFLAGS_NOOPT   = -O0 -g
 
 # compiler flag needed by some compilers when the main program is not fortran
@@ -127,7 +127,7 @@ LD_LIBS        = -L/opt/intel/composer_xe_2013.0.079/mkl/lib/intel64
 # If you have nothing better, use the local copy
 # BLAS_LIBS = $(TOPDIR)/LAPACK/libblas.a
 
-BLAS_LIBS      = -lmkl_blas95_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core
+BLAS_LIBS      = -lmkl_blas95_lp64 -lmkl_gf_lp64 -lmkl_sequential -lmkl_core -lmkl_gnu_thread
 
 # If you have nothing better, use the local copy
 # LAPACK_LIBS_SWITCH = internal
@@ -136,7 +136,7 @@ BLAS_LIBS      = -lmkl_blas95_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core
 LAPACK_LIBS    = -lmkl_lapack95_lp64
 LAPACK_LIBS_SWITCH = external
 
-SCALAPACK_LIBS = -lmkl_scalapack_lp64  -lmkl_blacs_lp64
+SCALAPACK_LIBS = -lmkl_scalapack_lp64  -lmkl_blacs_intelmpi_lp64
 
 # nothing needed here if the the internal copy of FFTW is compiled
 # (needs -D__FFTW in DFLAGS)

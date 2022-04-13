@@ -105,7 +105,7 @@ F90FLAGS       = $(FFLAGS) -cpp -fopenmp $(FDFLAGS) $(CUDA_F90FLAGS) $(IFLAGS) $
 
 # compiler flags with and without optimization for fortran-77
 # the latter is NEEDED to properly compile dlamch.f, used by lapack
-FFLAGS         = -O3 -g -fopenmp -I/home/jun_jiang/Softs/fftw-3.3.4_gnu/include
+FFLAGS         = -O3 -g -fopenmp -ffpe-summary="none" -I/home/jun_jiang/Softs/fftw-3.3.4_gnu/include
 FFLAGS_NOOPT   = -O0 -g
 
 # compiler flag needed by some compilers when the main program is not fortran
