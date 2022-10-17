@@ -265,6 +265,7 @@ trusted-host = \url{pypi.douban.com} \\
     \item 运行\textrm{python}
     \item \textrm{import~~ssl}测试正常即可
 \end{itemize}
+\textcolor{red}{如果编译中使用动态库\textrm{libssl}有问题，建议使用静态库编译}
 
 在此基础上，准备手动安装\textrm{numpy}、\textrm{scipy}等模块，建议指定环境变量\textrm{ATLAS}(版本3.8.4)、\textrm{LAPACK}(版本3.6.0)、\textrm{BLAS}\\ 
 \textcolor{red}{注意:环境变量要具体到绝对路径(包括文件名)}，如:\\
