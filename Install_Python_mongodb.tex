@@ -267,6 +267,45 @@ trusted-host = \url{pypi.douban.com} \\
 \end{itemize}
 \textcolor{red}{如果编译中使用动态库\textrm{libssl}有问题，建议使用静态库编译}
 
+指定\textrm{pip3}的安装源(以阿里云为例)\\
+\begin{itemize}
+	\item \textrm{pip3~config~set~global.index-url~\url{http://mirror.aliyun.com/pypi/simple/}}
+	\item \textrm{pip3~config~set~install.trusted-host~mirror.aliyun.com}
+	\item \textrm{pip3~config~list}
+	\item \textrm{pip3~config~set~global.index-url~\url{http://mirror.aliyun.com/pypi/simple/}}
+	\item \textrm{pip3~config~set~install.trusted-host~mirror.aliyun.com}
+	\item \textrm{pip3~config~list}
+\end{itemize}
+
+在此基础上，准备手动安装\textrm{numpy}、\textrm{scipy}等模块，建议指定环境变量\textrm{ATLAS}(版本3.8.4)、\textrm{LAPACK}(版本3.6.0)、\textrm{BLAS}\\ 
+\textcolor{red}{注意:环境变量要具体到绝对路径(包括文件名)}，如:\\
+\textcolor{blue}{export ATLAS=/share/home/jiangjun/lib/atlas3.8.4/lib/libatlas.so}\\
+\textcolor{blue}{export LAPACK=/share/home/jiangjun/lib/atlas3.8.4/lib/liblapack.so}\\
+\textcolor{blue}{export BLAS=/share/home/jiangjun/lib/atlas3.8.4/lib/libblas.so}\\
+分别进入\textrm{numpy}和\textrm{scipy}目录\\ 
+在文件 site.cfg 中指定有关库函数的参数(\textcolor{red}{注意:写绝对路径})\\
+\textcolor{green}{$[$ALL$]$}\\
+library\_dirs =/share/home/jiangjun/lib/atlas3.8.4/lib \\
+include\_dirs =/share/home/jiangjun/lib/atlas3.8.4/include \\
+src\_dir=/share/home/jiangjun/lib/atlas3.8 \\
+search\_static\_first=0 \\
+\#
+\\
+\# Atlas\\
+\# -\/-\/-\/-\/-\\
+\# Atlas is an open source optimized implementation of the BLAS and Lapack\\
+\# routines. Numpy will try to build against Atlas by default when available in\\
+\# the system library dirs. To build numpy against a custom installation of\\
+\# Atlas you can add an explicit section such as the following. Here we assume\\
+\# that Atlas was configured with ``prefix=/opt/atlas``.\\
+\#\\
+\textcolor{green}{$[$atlas$]$}\\
+library\_dirs = /share/home/jiangjun/lib/atlas3.8.4/lib \\
+include\_dirs = /share/home/jiangjun/lib/atlas3.8.4/include \\
+atlas\_libs=lapack, f77blas, cblas, atlas \\
+
+\end{itemize}<++>
+
 在此基础上，准备手动安装\textrm{numpy}、\textrm{scipy}等模块，建议指定环境变量\textrm{ATLAS}(版本3.8.4)、\textrm{LAPACK}(版本3.6.0)、\textrm{BLAS}\\ 
 \textcolor{red}{注意:环境变量要具体到绝对路径(包括文件名)}，如:\\
 \textcolor{blue}{export ATLAS=/share/home/jiangjun/lib/atlas3.8.4/lib/libatlas.so}\\
