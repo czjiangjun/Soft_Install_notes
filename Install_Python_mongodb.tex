@@ -351,6 +351,16 @@ export LAPACK=/usr/lib/liblapack.so\\
 pip install numpy\\
 pip install scipy\\
 
+\subsection{关于\rm{python}的图形界面\rm{GUI}}
+直接用\textrm{pip/pip3}安装\\
+\textrm{pip3~install~-i~\url{https://pypi.tuna.tsinghua.edu.cn/simple}~wxpython}\\
+会有问题
+解决办法是到网页\\
+\url{https://extras.wxpython.org/wxPython4/extras/linux/gtk3/}\\
+直接选择\textcolor{red}{合适的\textrm{whl}版本}，用命令\\
+如:~\textrm{pip3~install~ ~/Downloads/wxPython-4.2.0-cp38-cp38-linux_x86_64.whl}\\
+安装
+
 \textbf{virtualenv}:~用来建立一个虚拟的\textrm{python}环境，一个专属于项目的\textrm{python}环境。
 用\textrm{virtualenv}来保持一个干净的环境非常有用
 \begin{enumerate}
