@@ -247,6 +247,7 @@
 		\begin{enumerate}
 			\item \textrm{/usr/local/share/texmf/}
 			\item \textrm{/var/lib/texmf:/usr/share/texmf/}
+			\item \textrm{/usr/local/texlive/2022/texmf-dist/tex/latex/}
 			\item \textrm{/usr/share/texlive/texmf-dist/} \qquad\#\textcolor{red}{默认建议用\textrm{/usr/share/texlive/texmf-dist/tex/latex/}}
 		\end{enumerate}
 然后执行命令\\
@@ -269,6 +270,19 @@
 	\item \textrm{mktexlsr}~针对的是具体文件
 \end{itemize}
 所以建议两个命令都用!
+\vskip 10pt
+\textbf{测试有效的添加宏包}
+\begin{itemize}
+	\item   \textrm{/usr/local/texlive/2022/texmf-dist/tex/latex/handoutwithnotes/handoutWithNotes.sty}\\
+		\textrm{/usr/share/texlive/texmf-dist/tex/latex/handoutwithnotes/handoutWithNotes.sty}\\
+		\textrm{/home/jiangjun/.texlive2022/texmf-var/tex/latex/handoutWithNotes.sty}
+	\item \textrm{/home/jiangjun/.texlive2022/texmf-var/tex/latex/movie15\_dvipdfmx.sty}
+	\item \textrm{/usr/local/texlive/2022/texmf-dist/tex/latex/bbding/bbding.sty}
+	\item \textrm{/usr/local/texlive/2022/texmf-dist/tex/latex/chemformula}
+	\item \textrm{/usr/local/texlive/2022/texmf-dist/tex/latex/mhchem}
+	\item \textrm{}
+\end{itemize}
+\vskip 10pt
 \end{itemize}
 
 \section{常用的编辑工具}

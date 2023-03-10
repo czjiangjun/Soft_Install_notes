@@ -313,7 +313,6 @@ library\_dirs = /share/home/jiangjun/lib/atlas3.8.4/lib \\
 include\_dirs = /share/home/jiangjun/lib/atlas3.8.4/include \\
 atlas\_libs=lapack, f77blas, cblas, atlas \\
 
-\end{itemize}<++>
 
 在此基础上，准备手动安装\textrm{numpy}、\textrm{scipy}等模块，建议指定环境变量\textrm{ATLAS}(版本3.8.4)、\textrm{LAPACK}(版本3.6.0)、\textrm{BLAS}\\ 
 \textcolor{red}{注意:环境变量要具体到绝对路径(包括文件名)}，如:\\
@@ -397,7 +396,7 @@ pip install scipy\\
 解决办法是到网页\\
 \url{https://extras.wxpython.org/wxPython4/extras/linux/gtk3/}\\
 直接选择\textcolor{red}{合适的\textrm{whl}版本}，用命令\\
-如:~\textrm{pip3~install~ ~/Downloads/wxPython-4.2.0-cp38-cp38-linux_x86_64.whl}\\
+如:~\textrm{pip3~install~ ~/Downloads/wxPython-4.2.0-cp38-cp38-linux\_x86\_64.whl}\\
 安装
 
 \textbf{virtualenv}:~用来建立一个虚拟的\textrm{python}环境，一个专属于项目的\textrm{python}环境。
@@ -409,7 +408,7 @@ pip install scipy\\
 		\textrm{virtualenv~-\/-version}
 	\item 为一个工程项目搭建一个虚拟环境:\\
 		\textrm{cd~my\_project}\\
-		\textrm{virtualenv~my\_project_env}
+		\textrm{virtualenv~my\_project\_env}
 	\item 如果存在多个\textrm{python}解释器，可以选择指定一个\textrm{Python}解释器（比如``\textrm{python2.7}``），没有指定则由系统默认的解释器来搭建:\\
 		\textrm{virtualenv~-p~/usr/bin/python2.7~my\_project\_env}\\
 		将会在当前的目录中创建一个名为\textrm{my\_project\_env}的文件夹，这是一个独立的\textrm{python}运行环境，包含了\textrm{Python}可执行文件， 以及~\textrm{pip}~ 库的一份拷贝，这样就能安装其他包了，不过已经安装到系统\textrm{Python}环境中的所有第三方包都不会复制过来，这样就得到了一个不带任何第三方包的“干净”的\textrm{Python}运行环境来。
@@ -519,7 +518,7 @@ port = 27017}}}
 		\hspace*{25pt}\textrm{db\_file:~/home/TEST/WORKS/Mongo\_TEST/Cal\_Data\_Base/db.json}~\#指定计算数据存储用数据库的位置，\textrm{db.json}文件包含计算存储数据库的信息\\
 		\hspace*{25pt}\textrm{vasp\_cmd:~mpirun~-np~4~/home/TEST/Softwares/vasp.5.4.4/bin/vasp\_std}~\#指定核心计算所需的引擎\\
 		\hspace*{25pt}\textrm{scratch\_dir:~null}}}
-	\item 文件\textrm{my\_qadapter.yaml}~\# 这个文件指定了作业管理系统支持下提交计算作业的参数和形式，~\textcolor{blue}{这个文件是支持\textrm{qlaunch~rapidfire~\[-m~3\]}}命令的运行，类似于直接启动\\
+	\item 文件\textrm{my\_qadapter.yaml}~\# 这个文件指定了作业管理系统支持下提交计算作业的参数和形式，~\textcolor{blue}{这个文件是支持\textrm{qlaunch~rapidfire~[-m~3]}}命令的运行，类似于直接启动\\
 		\textrm{rlaunch~-l~/home/TEST/WORKS/FireWorks\_TEST/my\_launchpad.yaml~-w~/home/TEST/WORKS/FireWorks\_TEST/my\_fworker.yaml~rapidfire}\\
 \fbox{
 	\parbox{\textwidth}{
@@ -528,8 +527,8 @@ port = 27017}}}
 		\textrm{\_fw\_q\_type:~LoadSharingFacility}\\
 		\textrm{\#~\_fw\_template\_file:~/share/home/czjiangjun/WORKS/TEST\_ATOMATE/LSF\_template\_custom.txt}
 		\textrm{rocket\_launch:~rlaunch~-w~/home/jun-jiang/WORKS/FireWorks/my\_fworker.yaml~-l~/home/jun-iang/WORKS/FireWorks/my\_launchpad.yaml~rapidfire~#~singleshot} \#~本行指定的就是每个进程命令\\ 
-		\textrm{\#~rocket\_launch:~rlaunch~-c~/share/home/czjiangjun/WORKS/TEST\_FireWorks~singleshot~#rapidfire}\\
-		\textrm{\#~rocket\_launch:~rlaunch~-c~/share/home/czjiangjun/WORKS/TEST\_FireWorks~singleshot}\\ 
+		\textrm{\#~rocket\_launch:~rlaunch~-c~/share/home/czjiangjun/WORKS/TEST\_FireWorks ~singleshot ~#rapidfire}\\
+		\textrm{\#~rocket\_launch:~rlaunch~-c~/share/home/czjiangjun/WORKS/TEST\_FireWorks ~singleshot}\\ 
 		\textrm{\#~rocket\_launch:~bsub ~~./stand.lsf}
 		\textrm{nodes:~4}\\
 		\textrm{ntasks\_per\_node:~2}\\
@@ -548,7 +547,8 @@ port = 27017}}}
 		\textrm{\_q\_commands\_override:}\\
 		\hspace*{25pt}\textrm{submit\_cmd:~bsub}\\
 		\hspace*{25pt}\#~\textrm{submit\_cmd:~./}\\
-		\hspace*{25pt}\#~\textrm{status\_cmd:~bstatus}}}
+		\hspace*{25pt}\#~\textrm{status\_cmd: ~ bstatus}
+	}}
 \end{itemize}
 
 计算结果数据库配置文件\textrm{db.json}\\
