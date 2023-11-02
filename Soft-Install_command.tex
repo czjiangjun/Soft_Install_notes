@@ -173,6 +173,13 @@ make \&\& make install
 \textcolor{red}{注意：}查看有关mpi本身指向的编译器等信息的命令 \underline{\textcolor{blue}{mpiexec -info}}\\
 \textrm{MPI编译器封装的编译器查看命令}:~\underline{\textcolor{blue}{mpif90 --version/-v}~两个命令略有区别}
 
+当\textrm{openmpi}编译器版本过高，会出现报错:\\
+\textrn{Rank mismatch between actual argument at (1) and actual argument at (2) (scalar and rank-1)}
+
+\textcolor{red}{\textbf{添加编译选项 -fallow-argument-mismatch}}
+
+参阅\url{https://gcc.gnu.org/gcc-10/porting_to.html}
+
 \section{fftw的安装：}
 \textcolor{blue}{一般地，\textrm{Intel~}的\textrm{MKL~}自带了\textrm{FFTW~}的库函数，其中
 \begin{itemize}
@@ -217,6 +224,33 @@ make \&\& make install
 ./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=icc F77=ifort MPICC=mpiicc} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-shared -\/-enable-static -\/-enable-sse -\/-enable-sse2 -\/-enable-avx -\/-enable-avx2 -\/-enable-fma -\/-enable-threads -\/-enable-openmp -\/-enable-mpi -\/-enable-float
 
 make -j2 \&\& make install
+
+\section{数学库的安装}
+\subsection{{\rm LAPACK}和{\rm BLAS}库的安装}
+\textrm{LAPACK}可以在\url{https://www.netlib.org/lapack/}下载(\textrm{LAPACK}依赖\textrm{BLAS})，\textrm{LAPACK}的安装依赖\textrm{gcc}和\textrm{openmpi}
+
+\textrm{cp make.inc.example make.inc}
+
+\textrm{BLAS}库的编译:
+\begin{itemize}
+	\item  对文件\textrm{make.inc}，对文件倒数第4行做如下更改\\
+	\# 更改前\\
+	\textrm{BLASLIB      = ../../librefblas.a} \\
+\# 更改后\\
+\textrm{BLASLIB      = \underline{你的安装目录}/librefblas.a}
+\item \textrm{make blaslib
+\end{itemize}
+编译\textrm{LAPACK}时要注意务必完全编译完毕(\textrm{make all})，不报错才可以结束
+
+\subsection{编译\textrm{scalapack}}
+\textrm{cp SLmake.inc.example SLmake.inc}
+\begin{itemize}
+	\item 在文件\textrm{SLmake.inc}中指定\textrm{BLASLIB}和\textrm{LAPACKLIB}
+	\item \textrm{make all}
+\end{itemize}
+
+\subsection{编译\textrm{openblas}}
+	\textrm{make all}
 
 \section{库函数检查的有关命令}
 \textbf{nm}
