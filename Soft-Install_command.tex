@@ -174,7 +174,7 @@ make \&\& make install
 \textrm{MPI编译器封装的编译器查看命令}:~\underline{\textcolor{blue}{mpif90 --version/-v}~两个命令略有区别}
 
 当\textrm{openmpi}编译器版本过高，会出现报错:\\
-\textrn{Rank mismatch between actual argument at (1) and actual argument at (2) (scalar and rank-1)}
+\textrm{Rank mismatch between actual argument at (1) and actual argument at (2) (scalar and rank-1)}
 
 \textcolor{red}{\textbf{添加编译选项 -fallow-argument-mismatch}}
 
@@ -238,7 +238,7 @@ make -j2 \&\& make install
 	\textrm{BLASLIB      = ../../librefblas.a} \\
 \# 更改后\\
 \textrm{BLASLIB      = \underline{你的安装目录}/librefblas.a}
-\item \textrm{make blaslib
+\item \textrm{make blaslib}
 \end{itemize}
 编译\textrm{LAPACK}时要注意务必完全编译完毕(\textrm{make all})，不报错才可以结束
 
@@ -249,8 +249,9 @@ make -j2 \&\& make install
 	\item \textrm{make all}
 \end{itemize}
 
-\subsection{编译\textrm{openblas}}
-	\textrm{make all}
+\subsection{编译\textrm{openblas}}\\
+仔细阅读\textrm{README.md}~\textcolor{red}{关于是否使用\textrm{USE_OPENMP=1}选项}\\
+	\textrm{make all USE_OPENMP=1}
 
 \section{库函数检查的有关命令}
 \textbf{nm}
