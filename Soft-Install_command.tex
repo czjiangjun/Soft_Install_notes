@@ -242,16 +242,21 @@ make -j2 \&\& make install
 \end{itemize}
 编译\textrm{LAPACK}时要注意务必完全编译完毕(\textrm{make all})，不报错才可以结束
 
-\subsection{编译\textrm{scalapack}}
+\subsection{编译{\rm scalapack}}
 \textrm{cp SLmake.inc.example SLmake.inc}
 \begin{itemize}
 	\item 在文件\textrm{SLmake.inc}中指定\textrm{BLASLIB}和\textrm{LAPACKLIB}
 	\item \textrm{make all}
 \end{itemize}
 
-\subsection{编译\textrm{openblas}}\\
+\subsection{编译{\rm openblas}}\\
 仔细阅读\textrm{README.md}~\textcolor{red}{关于是否使用\textrm{USE_OPENMP=1}选项}\\
 	\textrm{make all USE_OPENMP=1}
+
+\subsection{编译{\rm mpiblacs}}
+\textcolor{red}{建议用mpich编译，而且版本过老，一般不需要}
+仔细阅读\textrm{README.md}%~\textcolor{red}{关于是否使用\textrm{USE_OPENMP=1}选项}
+\\编译文件位于\textrm{BMAKES}目录下，选择适当的编译文件(这里选择\textrm{Bmake.MPI-LINUX})，作为编译文件\textrm{Bmake.inc}
 
 \section{库函数检查的有关命令}
 \textbf{nm}
