@@ -258,6 +258,17 @@ make -j2 \&\& make install
 仔细阅读\textrm{README.md}%~\textcolor{red}{关于是否使用\textrm{USE_OPENMP=1}选项}
 \\编译文件位于\textrm{BMAKES}目录下，选择适当的编译文件(这里选择\textrm{Bmake.MPI-LINUX})，作为编译文件\textrm{Bmake.inc}
 
+\subsection{{\rm ATLAS库的安装}}
+仔细阅读\textrm{README}和\textrm{INSTALL.txt}\\
+
+\textrm{ATLAS}库必须在特定的目录下安装，不支持\textrm{-\/-prefix=}指定变量安装:\\
+
+\textrm{cd \$ATLAS\_INSTALLED\_PATH}\\ 
+配置文件命令:\\
+\textrm{\$ATLAS\_SRC\_PATH/configure ~-\/-with-netlib-lapack-tarfile=\$lapack-x.xx.x.tar.gz -\/-shared -\/-cripple-atlas-performance}\\
+安装命令:\\
+\textrm{make \&\& make~cehck \&\& make~ptcheck \&\& make~time \&\& make~install}
+
 \section{库函数检查的有关命令}
 \textbf{nm}
 
