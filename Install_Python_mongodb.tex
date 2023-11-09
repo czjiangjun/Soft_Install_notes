@@ -177,7 +177,7 @@ LibreSSL 2.6.4 and earlier do not provide the necessary APIs, https://github.com
 \fbox{
 	\parbox{\textwidth}{
 		\textrm{
-		sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libbz2-dev liblzma-dev sqlite3 libsqlite3-dev tk-dev uuid-dev libgdbm-compat-dev}}}
+		sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget libbz2-dev liblzma-dev sqlite3 libsqlite3-dev tk-dev uuid-dev libgdbm-compat-dev}}}
 
 \fbox{
 	\parbox{\textwidth}{
@@ -188,11 +188,11 @@ yum install -y libffi-devel zlib1g-dev \\
 yum install zlib* -y}}}
 
 \textbf{python的源码包安装配置}\\
-./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-2.7.11  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so'\\
+./configure CC=gcc \textcolor{red}{-\/-prefix=/share/home/jiangjun/Softs}  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so'\\
 make \&\& make install
 
 \textbf{类似地，python3的源码包安装配置}\\
-./configure CC=gcc -\/-prefix=/share/home/jiangjun/Softs/Python-3.9.5  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so' -\/-LDFLAGS='-L/usr/local/lib" CPPFLAGS="-I/usr/local/include' -\/-with-openssl=/home/TEST/.local/openssl \\
+./configure CC=gcc \textcolor{red}{-\/-prefix=/share/home/jiangjun/Softs}  -\/-enable-universalsdk -\/-with-universal-archs=``64-bit''  -\/-with-cxx-main=g++ -\/-with-tcltk-includes='-I/share/home/jiangjun/lib/tcltk/include' -\/-with-tcltk-libs='/share/home/jiangjun/lib/tcltk/lib/libtcl8.6.so /share/home/jiangjun/lib/tcltk/lib/libtk8.6.so' -\/-LDFLAGS='-L/usr/local/lib" CPPFLAGS="-I/usr/local/include' -\/-with-openssl=/home/TEST/.local/openssl \\
 make \&\& make install
 
 \textbf{setuptools安装} (参见文档 \textcolor{blue}{\textrm{Python}的安装过程(含\textrm{setuptools}).pdf})\\
@@ -262,6 +262,17 @@ trusted-host = \url{pypi.douban.com} \\
 	\item \textrm{echo~``/usr/local/openssl-xxx/lib''~>>~/etc/ld.so.conf}
 	\item \textrm{ldconfig -v}
 \end{itemize}
+建议设置环境变量
+\begin{itemize}
+	\item openssl\_dir=/home/jun-jiang/Softs/openssl/3.1.4
+	\item openssl\_inc=\$openssl\_dir/include
+	\item openssl\_lib=\$openssl\_dir/lib64
+	\item openssl\_ssl=\$openssl\_inc/openssl
+
+	\item export CFLAGS="-I\$openssl\_inc -I\$openssl\_ssl"
+	\item export LDFLAGS="-L\$openssl\_lib"
+\end{itemize}
+
 重新编译和安装\textrm{Python}，用选项\textrm{-\/-with-openssl=\$openssl~}的安装目录，在\textrm{Ubuntu}下记得修改\textrm{Module/Setup}文件:~
 \begin{itemize}
 	\item \textrm{vim~/root/Python-XXXX/Modules/Setup}
