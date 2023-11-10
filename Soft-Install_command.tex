@@ -263,8 +263,12 @@ make -j2 \&\& make install
 
 make \&\& make check \&\& make install
 
-环境变量中加载 \textrm{libxc}安装目录}/lib:\$LD\_LIBRARY\_PATH
-
+环境变量中加载 %\textrm{libxc}安装目录}/lib:\$LD\_LIBRARY\_PATH
+\begin{itemize}
+	\item \textrm{export~C\_INCLUDE\_PATH=\$XC/include}
+	\item \textrm{export~LIBRARY\_PATH=\$XC/lib}
+	\item \textrm{export LD\_LIBRARY_PATH=\$XC/lib}
+\end{itemize}
 
 \subsection{{\rm ATLAS库的安装}}
 仔细阅读\textrm{README}和\textrm{INSTALL.txt}\\
