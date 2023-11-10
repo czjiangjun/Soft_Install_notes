@@ -258,6 +258,14 @@ make -j2 \&\& make install
 仔细阅读\textrm{README.md}%~\textcolor{red}{关于是否使用\textrm{USE_OPENMP=1}选项}
 \\编译文件位于\textrm{BMAKES}目录下，选择适当的编译文件(这里选择\textrm{Bmake.MPI-LINUX})，作为编译文件\textrm{Bmake.inc}
 
+\subsection{编译{\rm libxc}}
+./configure -\/-prefix=\underline{你的\textrm{libxc}安装目录} -\/-enable-mpi -\/-enable-shared
+
+make \&\& make check \&\& make install
+
+环境变量中加载 \textrm{libxc}安装目录}/lib:\$LD\_LIBRARY\_PATH
+
+
 \subsection{{\rm ATLAS库的安装}}
 仔细阅读\textrm{README}和\textrm{INSTALL.txt}\\
 
