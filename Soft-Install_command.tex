@@ -594,6 +594,16 @@ rm -rf \$WIEN2K\_RUNDIR \\
 -gencode arch=compute\_80,code=[sm\_80,compute\_80]" \\
 -DCMAKE\_EXE\_LINKER\_FLAGS="-L\$EBROOTIFORT/lib/intel64 -DINTEL\_ARCH=cpu
 
+测试成功的(参考)
+\begin{itemize}
+	\item \textrm{tar -xvzf lammps-stable.tar.gz}
+	\item \textrm{cd lammps-2Aug2023}
+	\item \textrm{mkdir Build \&\& cd Build}
+	\item \textrm{cmake ../cmake -D BUILD\_SHARED\_LIBS=yes -D LAMMPS\_EXCEPTIONS=yes  -D PKG\_MANYBODY=yes -D PKG\_PYTHON=yes -D PKG\_RIGID=yes -D PKG\_MOLUCULE=yes -D PKG\_KSPACE=yes -D PKG\_MISC=yes -D PKG\_MC=yes -D PYTHON\_EXECUTABLE=yes}
+	\item \textrm{cmake -\/-build .}
+\end{itemize}
+
+
 \section{\rm{wine}安装及使用}
 \begin{itemize}
 	\item 运行64位体系结构的系统需要启用32位体系结构:\\
