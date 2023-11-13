@@ -599,10 +599,18 @@ rm -rf \$WIEN2K\_RUNDIR \\
 	\item \textrm{tar -xvzf lammps-stable.tar.gz}
 	\item \textrm{cd lammps-2Aug2023}
 	\item \textrm{mkdir Build \&\& cd Build}
-	\item \textrm{cmake ../cmake -D BUILD\_SHARED\_LIBS=yes -D LAMMPS\_EXCEPTIONS=yes  -D PKG\_MANYBODY=yes -D PKG\_RIGID=yes -D PKG\_MOLECULE=yes -D PKG\_KSPACE=yes -D PKG\_MISC=yes -D PKG\_MC=yes \#-D -D PKG\_PYTHON=yes PYTHON\_EXECUTABLE=yes}
+	\item \textrm{cmake ../cmake -D BUILD\_SHARED\_LIBS=yes -D LAMMPS\_EXCEPTIONS=yes  -D PKG\_MANYBODY=yes -D PKG\_RIGID=yes -D PKG\_MOLECULE=yes -D PKG\_KSPACE=yes -D PKG\_MISC=yes -D PKG\_MC=yes  -D PKG\_PYTHON=yes \#-D PYTHON\_EXECUTABLE=yes}
 	\item \textrm{cmake -\/-build .}
 \end{itemize}
 
+\# 添加\textrm{lammps}可执行文件\textrm{lmp_mpi}的路径:\\
+\textrm{export PATH=/home/wsg/software/anaconda3/envs/lammps/bin:\$PATH}\\
+\# 添加\textrm{lammps}势文件路径\\
+\textrm{export LAMMPS\_POTENTIALS=/home/wsg/software/lammps-29Sep2021/potentials:\$LAMMPS\_POTENTIALS}\\
+\# 添加\textrm{lammps}的\textrm{python}文件夹的路径(必需)\\
+\textrm{export PYTHONPATH=/home/wsg/software/lammps-29Sep2021/python:\$PYTHONPATH}\\
+\#然后下面是\textrm{Anaconda}的\textrm{lammps}环境搜索路径(必需，有\textrm{liblammps.so}和\textrm{libpython.so})\\
+\textrm{export LD\_LIBRARY\_PATH=/home/wsg/software/anaconda3/envs/lammps/lib:\$LD\_LIBRARY\_PATH}
 
 \section{\rm{wine}安装及使用}
 \begin{itemize}
