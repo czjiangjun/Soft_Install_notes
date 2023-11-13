@@ -599,7 +599,7 @@ rm -rf \$WIEN2K\_RUNDIR \\
 	\item \textrm{tar -xvzf lammps-stable.tar.gz}
 	\item \textrm{cd lammps-2Aug2023}
 	\item \textrm{mkdir Build \&\& cd Build}
-	\item \textrm{cmake ../cmake -D BUILD\_SHARED\_LIBS=yes -D LAMMPS\_EXCEPTIONS=yes  -D PKG\_MANYBODY=yes -D PKG\_PYTHON=yes -D PKG\_RIGID=yes -D PKG\_MOLECULE=yes -D PKG\_KSPACE=yes -D PKG\_MISC=yes -D PKG\_MC=yes \#-D PYTHON\_EXECUTABLE=yes}
+	\item \textrm{cmake ../cmake -D BUILD\_SHARED\_LIBS=yes -D LAMMPS\_EXCEPTIONS=yes  -D PKG\_MANYBODY=yes -D PKG\_RIGID=yes -D PKG\_MOLECULE=yes -D PKG\_KSPACE=yes -D PKG\_MISC=yes -D PKG\_MC=yes \#-D -D PKG\_PYTHON=yes PYTHON\_EXECUTABLE=yes}
 	\item \textrm{cmake -\/-build .}
 \end{itemize}
 
