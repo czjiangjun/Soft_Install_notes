@@ -599,7 +599,7 @@ rm -rf \$WIEN2K\_RUNDIR \\
 	\item \textrm{tar -xvzf lammps-stable.tar.gz}
 	\item \textrm{cd lammps-2Aug2023}
 	\item \textrm{mkdir Build \&\& cd Build}
-	\item \textrm{cmake ../cmake -D BUILD\_SHARED\_LIBS=yes -D LAMMPS\_EXCEPTIONS=yes  -D PKG\_MANYBODY=yes -D PKG\_RIGID=yes -D PKG\_MOLECULE=yes -D PKG\_KSPACE=yes -D PKG\_MISC=yes -D PKG\_MC=yes  -D PKG\_PYTHON=yes \#-D PYTHON\_EXECUTABLE=\$(which python3)}
+	\item \textrm{cmake ../cmake -D BUILD\_SHARED\_LIBS=yes -D LAMMPS\_EXCEPTIONS=yes  -D PKG\_MANYBODY=yes -D PKG\_RIGID=yes -D PKG\_MOLECULE=yes -D PKG\_KSPACE=yes -D PKG\_MISC=yes -D PKG\_MC=yes  -D PKG\_PYTHON=yes -D PYTHON\_EXECUTABLE=\$(which python3)}
 	\item \textrm{cmake -\/-build .}
 \end{itemize}
 
@@ -611,6 +611,18 @@ rm -rf \$WIEN2K\_RUNDIR \\
 \textrm{export PYTHONPATH=/home/wsg/software/lammps-29Sep2021/python:\$PYTHONPATH}\\
 \#然后下面是\textrm{Anaconda}的\textrm{lammps}环境搜索路径(必需，有\textrm{liblammps.so}和\textrm{libpython.so})\\
 \textrm{export LD\_LIBRARY\_PATH=/home/wsg/software/anaconda3/envs/lammps/lib:\$LD\_LIBRARY\_PATH}
+
+\subsection{{\rm LAMMPS}的建模、可视化工具}
+\textrm{ovito}安装时提示
+\textrm{qt.qpa.plugin:~From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin.\\
+qt.qpa.plugin:~Could not load the Qt platform plugin "xcb" in "" even though it was found.\\
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.\\ 
+Available platform plugins are: xcb, wayland, minimal.\\
+\\
+Aborted (core dumped)}\\
+
+解决方案:~安装\textrm{libxcb}库\\
+\textrm{sudo apt-get install libxcb-cursor}
 
 \section{\rm{wine}安装及使用}
 \begin{itemize}
