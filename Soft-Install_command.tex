@@ -231,6 +231,13 @@ make -j2 \&\& make install
 
 \textrm{cp make.inc.example make.inc}
 
+如果采用\textrm{cmake}编译:
+\begin{itemize}
+	\item \textrm{mkdir Build \&\& cd Build}
+	\item \textrm{cmake~.. -DCMAKE\_BUILD\_TYPE=RELEASE~-DBUILD_SHARED_LIBS=ON}
+	\item \textrm{make}
+\end{itemize}
+
 \textrm{BLAS}库的编译:
 \begin{itemize}
 	\item  对文件\textrm{make.inc}，对文件倒数第4行做如下更改\\
@@ -242,7 +249,11 @@ make -j2 \&\& make install
 \end{itemize}
 编译\textrm{LAPACK}时要注意务必完全编译完毕(\textrm{make all})，不报错才可以结束
 
-\subsection{编译{\rm scalapack}}
+\subsection{编译{\rm blacs}库}
+\textrm{BLACS}版本很老，用\textrm{openmpi}(版本号\textrm{1.8.4})或\textrm{mpich}(版本号\textrm{3.1.4})可以编译成功
+编译器必须选择\textcolor{red}{\textrm{mpif77}}和\textrm{mpicc}
+
+\subsection{编译{\rm scalapack}库}
 \textrm{cp SLmake.inc.example SLmake.inc}
 \begin{itemize}
 	\item 在文件\textrm{SLmake.inc}中指定\textrm{BLASLIB}和\textrm{LAPACKLIB}

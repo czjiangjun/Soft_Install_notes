@@ -1,0 +1,8 @@
+You have the following openblas libraries in /opt /usr/lib or /usr/lib64 and must select one of them in the R_LIBS:
+
+/opt/sogoupinyin/files/lib/libopenblas.so.0 /usr/lib/x86_64-linux-gnu/openblas-openmp/libopenblasp-r0.3.8.so /usr/lib/x86_64-linux-gnu/openblas-openmp/libopenblas.a /usr/lib/x86_64-linux-gnu/openblas-openmp/libopenblas.so /usr/lib/x86_64-linux-gnu/openblas-openmp/libopenblasp-r0.3.8.a /usr/lib/x86_64-linux-gnu/openblas-openmp/libopenblas.so.0 /usr/lib/x86_64-linux-gnu/libopenblas.a /usr/lib/x86_64-linux-gnu/libopenblas.so /usr/lib/x86_64-linux-gnu/libopenblas.so.0
+
+You have the following lapack libraries in /opt /usr/lib or /usr/lib64 and must select one of them in the R_LIBS:
+
+/usr/lib/x86_64-linux-gnu/liblapack.so /usr/lib/x86_64-linux-gnu/openblas-openmp/liblapack.so /usr/lib/x86_64-linux-gnu/openblas-openmp/liblapack.so.3 /usr/lib/x86_64-linux-gnu/openblas-openmp/liblapack.a /usr/lib/x86_64-linux-gnu/liblapack.so.3 /usr/lib/x86_64-linux-gnu/lapack/liblapack.so /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3 /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0 /usr/lib/x86_64-linux-gnu/lapack/liblapack.a /usr/lib/x86_64-linux-gnu/liblapack_pic.a /usr/lib/x86_64-linux-gnu/liblapack.a
+
