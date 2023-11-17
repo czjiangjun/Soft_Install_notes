@@ -281,6 +281,17 @@ make \&\& make check \&\& make install
 	\item \textrm{export LD\_LIBRARY_PATH=\$XC/lib}
 \end{itemize}
 
+\textrm{cmkake}安装
+\begin{itemize}
+	\item \textrm{mkdir~Build \&\& cd~build}
+	\item cmake ../ -DCMAKE\BUILD\_TYPE=Release -DCMAKE\_INSTALL\_PREFIX=\$LIBXC \\
+-DBUILD\_SHARED\_LIBS=YES -DCMAKE\_C\_COMPILER=gcc \\
+-DCMAKE\_Fortran\_COMPILER=gfortran \\
+-DCMAKE\_INSTALL\_LIBDIR=lib -DENABLE\_FORTRAN=ON \\
+-DENABLE\_CXX=ON -DENABLE\_PYTHON=ON \\
+-DBUILD\_TESTING=ON
+\end{itemize}
+\item make \&\& make install
 \subsection{{\rm ATLAS库的安装}}
 仔细阅读\textrm{README}和\textrm{INSTALL.txt}\\
 
