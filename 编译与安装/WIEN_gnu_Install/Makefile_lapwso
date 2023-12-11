@@ -1,0 +1,158 @@
+###############################################################################
+#                                                                             #
+#                         Generic Makefile for lapwso                         #
+#                                                                             #
+#  make           ... generate executable for the sequential version          #
+#  make seq       ... generate executable for the sequential version          #
+#  make para      ... generate executable for the COMPLEX sequential version  #
+#  make all       ... generate sequential and parallel version                #
+#  make clean     ... delete unnecessary files                                #
+#                                                                             #
+###############################################################################
+
+SHELL = /bin/sh
+
+###############################################################################
+#                           User defined variables                            #
+###############################################################################
+
+#---------------- compilers ----------------
+FC = gfortran
+MPF = mpif90 
+CC = gcc -O2 -ftree-loop-vectorize -ffast-math -march=native
+
+#---------------- scalapack ----------------
+SCALAPACKROOT = 
+SCALAPACK_LIBNAME = /home/jun-jiang/.local/lib/libscalapck.a
+BLACSROOT = 
+BLACS_LIBNAME = 
+MKL_TARGET_ARCH = 
+ifneq ($(SCALAPACKROOT),)
+  ifeq ($(SCALAPACKROOT),$(MKLROOT))
+    ifeq ($(BLACSROOT),$(MKLROOT))
+      SCALAPACK_LIBS = -l$(SCALAPACK_LIBNAME) -l$(BLACS_LIBNAME)
+    else
+      SCALAPACK_LIBS = -L$(SCALAPACKROOT)$(MKL_TARGET_ARCH) -l$(SCALAPACK_LIBNAME) \
+                       -L$(BLACSROOT)$(MKL_TARGET_ARCH) -l$(BLACS_LIBNAME)
+    endif
+  else
+    SCALAPACK_LIBS = -L$(SCALAPACKROOT)$(MKL_TARGET_ARCH) -l$(SCALAPACK_LIBNAME) \
+                     -L$(BLACSROOT)$(MKL_TARGET_ARCH) -l$(BLACS_LIBNAME)
+  endif
+endif
+
+SCALAPACK_LIBS = /home/jun-jiang/.local/lib/libscalapack.a /home/jun-jiang/.local/lib/libblacs.a
+
+#------------- compiler options ------------
+FOPT =  -ffree-form -O2 -ffree-line-length-none -lpthread
+FPOPT = -ffree-form -O2 -ffree-line-length-none -Wno-argument-mismatch -lpthread #-fallow-argument-mismatch
+#FOPT = -ffree-form -O2 -ffree-line-length-none
+#FPOPT =  -ffree-form -O2 -ffree-line-length-none
+DParallel = '-DParallel'
+FGEN     =  $(PARALLEL)
+
+#-------------- loader options -------------
+LDFLAGS = $(FOPT) -L../SRC_lib
+R_LIBS   = /home/jun-jiang/.local/lib/libopenblas_nehalemp-r0.3.24.a /home/jun-jiang/.local/lib/liblapack.a
+RP_LIBS = $(SCALAPACK_LIBS) $(R_LIBS) # -lredist -ltools -lfblacs -lblacs -lmpi
+
+###############################################################################
+#                       End of user defined variables                         #
+###############################################################################
+
+DESTDIR  = .
+
+EXECNAME = lapwso
+P_EXECNAME = lapwso_mpi
+
+###############################################################################
+###############################################################################
+
+
+EXEC = $(DESTDIR)/$(EXECNAME)
+P_EXEC = $(DESTDIR)/$(P_EXECNAME)
+
+#..............................................................................
+#
+#  Routines which can be compiled unmodified
+#
+OBJS = reallocate.o modules.o W2kinit.o abclm.o    couple.o   errclr.o  errflg.o   garadme.o gtfnam.o  \
+        harmon2.o  atpar.o    hmsec.o   init.o     kptin_nv.o      kptin.o   latgen2.o \
+        outwin.o   rint13.o  lapwso.o   cali.o    sphbes.o vnsrint.o  \
+        lomain.o   abc.o      cputim.o  dvbes1.o   bess.o    lagder.o  \
+        rotate.o   ylm.o      harmon.o  sphbru.o   outerr.o  lap_bp.o \
+        inouh.o    diracout.o inth.o    select.o   abc_r.o   rlomain.o \
+        kptout.o  angle.o gaunt.o ph.o t3j.o t3j0.o pzheevx16.o \
+        dergl.o    hscalc.o   dergl2.o  vderiv.o  rotdef.o W2kutils.o \
+        symop.o garadorb.o hns.o hsocalc.o horbcalc.o vorblo.o euler.o get_nloat.o 
+
+P_OBJS = reallocate.o modules.o W2kinit.o abclm.o    couple.o   errclr.o  errflg.o   garadme.o gtfnam.o  \
+        harmon2.o  atpar.o    hmsec.o   init.o     kptin_nv.o    kptin.o   latgen2.o \
+        outwin.o   rint13.o  lapwso.o   cali.o    sphbes.o vnsrint.o  \
+        lomain.o   abc.o      cputim.o  dvbes1.o   bess.o    lagder.o  \
+        rotate.o   ylm.o      harmon.o  sphbru.o   outerr.o  lap_bp.o \
+        inouh.o    diracout.o inth.o    select.o   abc_r.o   rlomain.o \
+        kptout.o  angle.o gaunt.o ph.o t3j.o t3j0.o pzheevx16.o \
+        dergl.o    hscalc.o   dergl2.o  vderiv.o  rotdef.o W2kutils.o \
+        symop.o garadorb.o hns.o hsocalc.o horbcalc.o vorblo.o euler.o get_nloat.o 
+
+OBJSMOD = abc.o abc_r.o abclm.o angle.o atpar.o cali.o couple.o \
+          dergl.o dergl2.o diracout.o garadme.o garadorb.o harmon.o \
+          hns.o horbcalc.o hscalc.o hsocalc.o \
+          init.o inouh.o kptin_nv.o kptin.o kptout.o lapwso.o latgen2.o lomain.o \
+          outwin.o rint13.o rlomain.o rotdef.o stern.o vderiv.o vectest.o \
+          vnsrint.o vorblo.o
+
+
+#..............................................................................
+default: seq
+
+all: 
+	make seq para
+
+seq: keep_seq_files
+	$(MAKE) $(EXEC) FORT=$(FC) FFLAGS='$(FGEN) $(FOPT)'
+
+para: keep_par_files
+	$(MAKE) $(P_EXEC) FORT=$(MPF) FFLAGS='$(FGEN) $(FPOPT) $(DParallel)'
+
+#..............................................................................
+
+$(EXEC): $(OBJS)
+	$(FORT) -o $(EXEC) $(OBJS) $(LDFLAGS) $(R_LIBS)
+$(P_EXEC): $(P_OBJS)
+	$(FORT) -o $(P_EXEC) $(P_OBJS) $(LDFLAGS) $(RP_LIBS)
+
+keep_seq_files:
+	if [ -f .parallel ]; then \
+		rm -f .parallel $(P_OBJS) *.mod; \
+	fi
+	touch .sequential
+
+keep_par_files:
+	if [ -f .sequential ]; then \
+		rm -f .sequential $(OBJS) *.mod; \
+	fi
+	touch .parallel
+#..............................................................................
+#
+#  All routines depend upon an include file (contains common PARAMETERS)
+#
+$(OBJS):		Makefile
+$(OBJSMOD):		modules.o W2kinit.o 
+
+clean:
+	-rm -f *.o _tmp_.* *.P .real .complex .sequential .parallel *.mod
+
+#..............................................................................
+#
+#
+.c.o:
+	$(CC) -c $<
+.f.o:
+	$(FORT) $(FFLAGS) -c $<
+.F.o:
+	$(FORT) $(FFLAGS) -c $<
+#${OBJS} : %.o : %.f90
+#	$(FC) $(FFLAGS) -c $< 
+
