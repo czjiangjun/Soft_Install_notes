@@ -326,6 +326,35 @@ make \&\& make check \&\& make install
 
 \textcolor{red}{-d}\;\;查看动态库的真实名字
 
+\section{\rm{CP2k}的安装}
+由\textrm{github}下载最新版的\textrm{CP2k}\\
+\textrm{git clone git@github.com:cp2k/cp2k.git}
+\subsection{预安装}
+进入到目录\textrm{cd tools/toolchain}\\
+执行安装命令:\\
+\textrm{./install\_cp2k\_toolchain.sh  -\/-with-openmpi=/home/jun-jiang/Softs/openmpi/5.0.0\_gnu -\/-with-libxsmm=install -\/-with-openblas=/home/jun-jiang/.local -\/-with-fftw=/home/jun-jiang/Softs/fftw/3.3.9\_gnu -\/-with-cmake=install -\/-with-libint=no -\/-with-libxc=/home/jun-jiang/.local/libxc/6.2.2 -\/-with-libgrpp=install -\/-with-libxsmm=install -\/-with-scalapack=/home/jun-jiang/.local -\/-with-libvdwxc=install}\\
+几个选项
+\begin{itemize}
+	\item \textrm{-\/-with-openmpi=system}:~这里的\textrm{system}明确为库函数的所在目录
+	\item \textrm{-\/-with-cmake=install}:~这里的\textrm{install}是直接在线下载安装，如:\\
+		\textrm{wget -\/-quiet https://www.cp2k.org/static/downloads/libint-v2.6.0-cp2k-lmax-5.tgz}\\
+		\textrm{libint-v2.6.0-cp2k-lmax-5.tgz: OK}\\
+		\textrm{Checksum of libint-v2.6.0-cp2k-lmax-5.tgz Ok}\\
+\textrm{Installing from scratch into /home/jun-jiang/Softwares/cp2k/tools/toolchain/install/libint-v2.6.0-cp2k-lmax-5}
+	\item \textrm{-\/-with-libint=no}:~这里的\textrm{no}表示不安装
+\end{itemize}
+\subsection{安装\rm{CP2k}}
+\textrm{Now copy:\\
+cp /home/jun-jiang/Softwares/cp2k/tools/toolchain/install/arch/* to the cp2k/arch/ directory}
+ 
+\textrm{To use the installed tools and libraries and cp2k version\\
+compiled with it you will first need to execute at the prompt:\\
+  source /home/jun-jiang/Softwares/cp2k/tools/toolchain/install/setup}
+
+\textrm{To build CP2K you should change directory:\\
+  cd cp2k/\\
+  make -j 2 ARCH=local VERSION="ssmp sdbg psmp pdbg"}
+
 \section{WIEN2k的安装}
 选定安装目录(没有则新建一个目录)，将\textrm{WIN2k}安装文件包安放在该目录下。根据\textrm{WIEN2k\_Users-Guide}\upcite{WIEN2K-UG_2001}的第\textrm{11}章\textrm{Installation and Dimensioning}说明，\textrm{WIEN2k}的安装如下：
 
