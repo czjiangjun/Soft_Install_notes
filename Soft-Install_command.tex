@@ -352,8 +352,15 @@ compiled with it you will first need to execute at the prompt:\\
   source /home/jun-jiang/Softwares/cp2k/tools/toolchain/install/setup}
 
 \textrm{To build CP2K you should change directory:\\
-  cd cp2k/\\
-  make -j 2 ARCH=local VERSION="ssmp sdbg psmp pdbg"}
+cd cp2k/}\\
+\textrm{git submodule update -\/-init -\/-recursive}\\
+因为 \textrm{ext/dbcsr} 没有更新:~如直接网络链接有问题，可尝试\\
+\textrm{git clone https://github.com/cp2k/dbcsr.git}\\
+然后再执行\\
+\textrm{git submodule update -\/-init -\/-recursive}\\
+
+最后执行\\
+\textrm{make -j 2 ARCH=local VERSION="ssmp sdbg psmp pdbg"}
 
 \section{WIEN2k的安装}
 选定安装目录(没有则新建一个目录)，将\textrm{WIN2k}安装文件包安放在该目录下。根据\textrm{WIEN2k\_Users-Guide}\upcite{WIEN2K-UG_2001}的第\textrm{11}章\textrm{Installation and Dimensioning}说明，\textrm{WIEN2k}的安装如下：
