@@ -180,6 +180,10 @@ make \&\& make install
 
 参阅\url{https://gcc.gnu.org/gcc-10/porting_to.html}
 
+\textrm{WIEN2k}代码版本很老，用\textrm{gfortran}编译器编译时，建议加入编译选项\textcolor{red}{-fallow-invalid-boz -fallow-argument-mismatch}防止变量传递时出现错误
+
+\textrm{WIEN2k}代码中的交换-相关泛函包含得比较全，如无必要，不要使用\textrm{libxc}库函数的交换-相关泛函(因为\textrm{WIEN2k}代码较老，编译时使用\textrm{libxc}库会出错)
+
 \section{fftw的安装：}
 \textcolor{blue}{一般地，\textrm{Intel~}的\textrm{MKL~}自带了\textrm{FFTW~}的库函数，其中
 \begin{itemize}
