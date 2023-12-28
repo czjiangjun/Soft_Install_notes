@@ -196,12 +196,15 @@ make \&\& make install
 
 \textbf{\textcolor{red}{则必须安装\textrm{fftw~}库函数}}
 
+\textcolor{color}{red}{\textrm{FFTW}有三类库，分别是\textrm{libfftw.lib}(\textrm{double})、\textrm{libfftwf.lib}(\textrm{float})、libfftwl.lib(\textrm{long~double})}
+
+当编译参数有\textrm{-\/-enable-float}就会编译出\textrm{libfftwf.lib}
 
 tar -xvzf fftw-3.3.4.tar.gz
 
 cd fftw-3.3.4
 
-./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=ifort MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi \textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
+./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=ifort MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi \textcolor{brown}{-\/-enable-threads -\/-enable-sse -\/-enable-sse2}
 
 make \&\& make install
 
@@ -213,15 +216,15 @@ make \&\& make install
 
 如果要生成包含\textrm{\textcolor{red}{fftw3f/fftw3f\_mpi/\_thread}}等动态库，用如下的设置
 
-./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=mpif90 MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi  -\/-enable-openmp \textcolor{red}{-\/-enable-shared }\textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
+./configure -\/-prefix=\underline{你的FFTW安装目录} CC=icc MPICC=mpicc F77=ifort FC=mpif90 MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi  -\/-enable-openmp \textcolor{red}{-\/-enable-shared }\textcolor{brown}{ -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
 
 如果用\textcolor{red}{\textrm{gcc/gfortran}}编译器编译
 
-./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=gcc MPICC=mpicc F77=gfortran FC=mpif90} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi  -\/-enable-openmp \textcolor{red}{-\/-enable-shared} \textcolor{brown}{-\/-enable-float -\/-enable-threads -\/-enable-sse -\/-enable-sse2}
+./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=gcc MPICC=mpicc F77=gfortran FC=mpif90} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-mpi  -\/-enable-openmp \textcolor{red}{-\/-enable-shared} \textcolor{brown}{-\/-enable-threads -\/-enable-sse -\/-enable-sse2}
 
 如果用\textcolor{red}{\textrm{intelmpi}编译器编译}
 
-./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=icc F77=ifort MPICC=mpiicc} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-shared -\/-enable-static -\/-enable-sse -\/-enable-sse2 -\/-enable-avx -\/-enable-avx2 -\/-enable-fma -\/-enable-threads -\/-enable-openmp -\/-enable-mpi -\/-enable-float
+./configure -\/-prefix=\underline{你的FFTW安装目录} \textcolor{red}{CC=icc F77=ifort MPICC=mpiicc} MPILIBS=-I\underline{你的MPI安装目录}/include -\/-enable-shared -\/-enable-static -\/-enable-sse -\/-enable-sse2 -\/-enable-avx -\/-enable-avx2 -\/-enable-fma -\/-enable-threads -\/-enable-openmp -\/-enable-mpi
 
 make -j2 \&\& make install
 
