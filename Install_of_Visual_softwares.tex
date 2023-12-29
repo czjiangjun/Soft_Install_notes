@@ -191,7 +191,7 @@
 		将上述\textcolor{red}{sudo\; apt-get\; install\; libglut-dev}命令改成\textcolor{blue}{sudo\; apt-get\; install\; freeglut3-dev}即可。 
 \end{itemize}
 
-\section{ffmpeg合并多个视频}
+\section{\rm{ffmpeg}合并多个视频}
 \begin{itemize}
 	\item 安装:~\textrm{sudo apt-get install ffmpeg}\\
 		\textrm{ffmpeg}依赖的库主要有三个:~\textrm{yasm},~\textrm{sdl1.2}和\textrm{sdl2.0}\\
@@ -203,10 +203,24 @@
 	\item 运行命令:~\textcolor{red}{\textrm{ffmpeg -f concat -safe 0 -i to\_be\_merged.txt -c copy output.mp4}}即可
 \end{itemize}
 
+\section{\rm{wxpython}的安装}
+\begin{itemize}
+	\item 安装\textrm{GNU}编译链接工具\\ 
+		        \textrm{sudo apt-get install build-essential}
 
+	\item 安装\textrm{gtk}，可以使用如下指令同时安装两个版本\textrm{gtk2}和\textrm{gtk3}:\\
+		\textrm{sudo apt-get install gnome-core}
 
+		如果安装失败，可以直接安装\textrm{gtk3}，命令如下:\\
+		\textrm{sudo apt-get install libgtk-3-dev}
 
+	\item 安装\textrm{pkg-config}用于自动查找\textrm{gtk}的头文件位置\\
+		\textrm{sudo apt-get install pkg-config}
+\end{itemize}
+        安装完成后，可以使用以下命令来校验安装是否成功，并查看\textrm{GTK+3.0}所包含的所有头文件以及库的路径:\\
+\textrm{pkg-config -\/-cflags -\/-libs gtk+-3.0}
 
+用命令\textrm{pip3 install wxpython}安装\textrm{wxpython}
 
 
 %-------------------The Figure Of The Paper------------------
