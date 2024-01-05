@@ -871,4 +871,31 @@ Aborted (core dumped)}\\
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 \clearpage     %\end{CJK} 前加上\clearpage是CJK的要求
+
+%\section{\rm{slurm}的安装}
+\section{\rm{R}语言及\textrm{Rstudio-server}的安装}
+安装\textrm{R}语言\\ 
+\# 更新软件包列表:~\\
+\textrm{sudo apt update -qq}\\
+\# 安装帮助程序包:~\\
+\textrm{sudo apt install -\/-no-install-recommends software-properties-common dirmngr}\\
+\# 添加密钥:~\\
+\textrm{wget -qO- \url{https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc} | sudo tee -a /etc/apt/trusted.gpg.d/cran\_ubuntu\_key.asc}\\
+\# 添加R4.0的镜像源:~
+\textrm{sudo add-apt-repository "deb \url{https://cloud.r-project.org/bin/linux/ubuntu \$(lsb\_release -cs)-cran40/}"}\\
+\# 安装\textrm{R}:\\
+\textrm{sudo apt install -y r-base-core}
+
+以下命令分别修改\textrm{Bioconductor}和\textrm{CRAN}的默认镜像源（方便以后安装\textrm{R}包）
+\textrm{echo -e 'options(BioC\_mirror="\textrm{https://mirrors.tuna.tsinghua.edu.cn/bioconductor}")\noptions("repos" = c(CRAN="\textrm{https://mirrors.tuna.tsinghua.edu.cn/CRAN/}"))' >> ~/.Rprofile}
+
+\textcolor{red}{打开\textrm{R}，安装\textrm{ggplot2}包}:~\\
+\textrm{install.packages("ggplot2")}
+
+\textrm{RStudio-Server}安装:\\
+\textrm{wget -c \url{http://download2.rstudio.org/sever/bionic/amd64/rstudio-server-2023.03.0-386-amd64.deb}}\\
+\textrm{sudo apt-get install -y gdebi-core}\\
+\textrm{sudo gdebi rstudio-server-2023.03.0-386-amd64.deb}
+
+打开浏览器，输入\textrm{IP}:端口（默认端口为\textrm{8787}），输入用户名密码
 \end{document}
