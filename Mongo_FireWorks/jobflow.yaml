@@ -1,0 +1,18 @@
+JOB_STORE:
+  docs_store:
+    type: MongoStore
+    database: JobFlow
+    host: localhost
+    port: 27017
+    username: ""
+    password: ""
+    collection_name: outputs
+  additional_stores:
+    data:
+      type: GridFSStore
+      database: MgO
+      host: localhost
+      port: 27017
+      username: ""
+      password: ""
+      collection_name: outputs_blobs

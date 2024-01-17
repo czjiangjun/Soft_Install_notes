@@ -1,0 +1,2 @@
+        VASP_CMD: "/home/test/.local/openmpi-5.0.0/bin/mpirun -np 2 /home/test/Downloads/vasp.6.2.0/bin/vasp_std"
+#        VASP_CMD: vasp_std
