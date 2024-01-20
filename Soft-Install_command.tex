@@ -883,8 +883,49 @@ Aborted (core dumped)}\\
 \end{document}
 
 \section{\rm{Docker}}
-\textrm{docker run -v ~/Softwares/WIEN2k_18.2:/home -w /home -it softwarei\_wien2k /bin/bash}
-\textrm{ubuntu}可视化界面
+\textrm{Ubuntu}下\textrm{Docker}的安装:\\
+\textrm{sudo apt-get update}\\
+\textrm{sudo apt-get install ca-certificates curl gnupg}\\
+\textrm{sudo install -m 0755 -d /etc/apt/keyrings}\\
+\textrm{curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg -\/-dearmor -o /etc/apt/keyrings/docker.gpg}\\
+\textrm{sudo chomd a+r /etc/apt/keyrings/docker.gpg}
+
+添加\textrm{docker}在线安装源:\\
+``deb [arch=$(dpkg -\/-print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \backslash \\
+\$(. /etc/os-release \&\& echo "\$VERSION_CODENAME") stable" | \backslash \\
+sudo tee /etc/apt/source.list.d/docker.list > /dev/null
+
+更新软件源:\\
+\textrm{sudo apt-get update}\\
+
+安装\textrm{docker}\\
+\textrm{sudo apt-get install docker-ce docker-ce-cil containerd.io docker-buildx-plugin docker-compose-plugin}\\
+
+验证\textrm\{docker}安装结果\\
+\textrm{sudo docker run hello-world}
+
+
+配置国内源地址:\\
+\textrm{vim /etc/docker/daemon.json}
+
+\textrm{\{"registry-mirrors" : ["https://mirror.ccs.tencentyun.com","http://registry.docker-cn.com","http://docker.mirrors.ustc.edu.cn","http://hub-mirror.c.163.com"],"insecure-registries" : ["registry.docker-cn.com","docker.mirrors.ustc.edu.cn"],"debug" : true,"experimental" : true\\
+\}}\\
+
+重启\textrm{docker}\\
+
+\textrm{systemctl restart docker.service}
+
+基础\textrm{docker}命令\\
+\textrm{docker -v} \#查看版本\\
+\textrm{systemctl start docker} \#启动\textrm{docker}\\
+\textrm{systemctl stop docker}  \#停止\textrm{docker}\\
+\textrm{systemctl restart docker} \#重启\textrm{docker}\\
+\textrm{systemctl status docker}  \#查看\textrm{docker}状态\\
+\textrm{systemctl enable docker} \#开机启动\\
+
+\textrm{Docker}的运行:\\
+\textrm{docker run -v ~/Softwares/WIEN2k\_18.2:/home -w /home -it softwarei\_wien2k /bin/bash}\\
+\textrm{ubuntu}可视化界面\\
 \textrm{docker pull dorowu/ubuntu-desktop-lxde-vnc}\\
 \textrm{docker run -\/-name vnc_test -p 6080:80 -v /dec/shm:/dev/shm dorowu/ubuntu-desktop-lxde-vnc}
 
