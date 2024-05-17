@@ -880,6 +880,12 @@ Aborted (core dumped)}\\
 \textrm{sudo gdebi rstudio-server-2023.03.0-386-amd64.deb}
 
 打开浏览器，输入\textrm{IP}:端口（默认端口为\textrm{8787}），输入用户名密码
+
+\section{\rm{yum}安装\textrm{rpm}}
+\textrm{Centos}非\textrm{root}用户(普通用户)安装\textrm{rpm}包
+
+\textrm{rpm2cpio xxxx.rpm | cpio -idvm}\\
+这样会把软件安装在当前目录下
 \end{document}
 
 \section{\rm{Docker}}
