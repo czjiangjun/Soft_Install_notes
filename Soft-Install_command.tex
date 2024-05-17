@@ -927,7 +927,9 @@ sudo tee /etc/apt/source.list.d/docker.list > /dev/null
 \textrm{docker run -v ~/Softwares/WIEN2k\_18.2:/home -w /home -it softwarei\_wien2k /bin/bash}\\
 \textrm{ubuntu}可视化界面\\
 \textrm{docker pull dorowu/ubuntu-desktop-lxde-vnc}\\
-\textrm{docker run -\/-name vnc_test -p 6080:80 -v source\_dir:object\_dir -v /dev/shm:/dev/shm -w /home dorowu/ubuntu-desktop-lxde-vnc}
+\textrm{docker run -\/-name vnc_test -p 6080:80 -v source\_dir:object\_dir (-v /dev/shm:/dev/shm) -w /home dorowu/ubuntu-desktop-lxde-vnc}
+
+\textrm{/dev/shm}~目录，\textrm{shm}~代表共享内存。\textrm{/dev/shm}~是一个临时文件系统~(操作磁盘中的文件一样来将读写内存，换言之，用文件读写的语法来操作\textrm{/dev/shm/a.txt}，但是这个文件本质是存在内存里的，所以读写速度会非常快)。有了\textrm{/dev/shm}，可以让一个进程非常高效地存取一些临时文件，或者让多个进程非常高效的“共享内存”。这种“进程间快速共享内存”的能力对于很多机器学习框架来说非常有用。
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
