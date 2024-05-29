@@ -598,6 +598,40 @@ port = 27017}}}
 	\item \textrm{python3~mgo\_analysis.py}~\#~计算结果数据分析
 \end{itemize}
 
+\section{\rm{ATOMATE2}下的数据库配置}
+\textrm{ATOMATE2}的环境配置较\textrm{ATOMATE}大为简化，只需要配置两个文件:\\
+\begin{itemize}
+	\item 文件\textrm{atomate2.yaml}:~指定\textrm{VASP}执行命令\\
+		\textrm{VASP\_CMD: mpirun -np 2 /home/jun-jiang/Softwares/VASP/vasp6.3.0/vasp.6.3.0/bin_orig/vasp\_std}\\
+		该文件写入\textrm{.bashrc}，成为环境变量:~\textcolor{blue}{ATOMATE2\_CONFIG\_FILE}\\
+		\textrm{export ATOMATE2\_CONFIG\_FILE=/home/jun-jiang/WORKS/ATOMATE2_TEST/Config/atomate2.yaml}
+
+	\item 文件\textrm{jobflow.yaml}:~指定计算结果和计算流程所存储用的\textrm{MongoDB}数据库，及其链接方式:\\
+
+\fbox{
+	\parbox{\textwidth}{
+		\hspace*{25pt}\textrm{JOB\_STORE:}~$\ast$系统指定的存储数据名(\textrm{JOB\_STORE})，不可改动\\
+		\hspace*{27pt}\textrm{docs\_store:}\\
+		\hspace*{29pt}\textrm{type:~MongoStore}~$\ast$人工指定的存储计算对象的数据库名\\
+		\hspace*{29pt}\textrm{database:~MongoDB\_FOR\_ATOMATE}\\
+		\hspace*{29pt}\textrm{host:~localhost}\\
+		\hspace*{29pt}\textrm{port:~27017}\\
+		\hspace*{29pt}\textrm{username: }\\
+		\hspace*{29pt}\textrm{password: }\\
+		\hspace*{29pt}\textrm{collection\_name:~outputs}~$\ast$计算对象数据的\textrm{collection}名\\
+		\hspace*{27pt}\textrm{additional\_stores:}\\
+		\hspace*{29pt}\textrm{data:}\\
+		\hspace*{31pt}\textrm{type:~GridFSStore}\\
+		\hspace*{31pt}\textrm{database:~MgO}~$\ast$人工指定的存储计算流程与任务的数据库名\\
+		\hspace*{31pt}\textrm{host:~localhost}\\
+		\hspace*{31pt}\textrm{port:~27017}\\
+		\hspace*{31pt}\textrm{username: }\\
+		\hspace*{31pt}\textrm{password: }\\
+		\hspace*{31pt}\textrm{collection\_name:~outputs\_blobs}~$\ast$计算流程与任务数据的\textrm{collection}名(可以是多个)
+	}}\\
+		该文件写入\textrm{.bashrc}，成为环境变量:~\textcolor{blue}{JOBFLOW\_CONFIG\_FILE}\\
+		\textrm{export JOBFLOW\_CONFIG\_FILE=/home/jun-jiang/WORKS/ATOMATE2_TEST/Config/jobflow.yaml}
+\end{itemize}
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
