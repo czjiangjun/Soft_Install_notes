@@ -632,6 +632,53 @@ port = 27017}}}
 		该文件写入\textrm{.bashrc}，成为环境变量:~\textcolor{blue}{JOBFLOW\_CONFIG\_FILE}\\
 		\textrm{export JOBFLOW\_CONFIG\_FILE=/home/jun-jiang/WORKS/ATOMATE2_TEST/Config/jobflow.yaml}
 \end{itemize}
+
+\section{\rm{BaxKB}的安装和使用}
+\textrm{MaxKB~(Max Knowledge Base)}是一款基于大语言模型\texrm{LLM~(Large Language Model)}的知识库问答系统
+\textrm{docker pull 1panel/maxkb}\\
+\textrm{docker~run~-d~-\/-name=maxkb~-p~8080:8080~-v~\sim/.maxkb:/var/lib/postgresql/data~1panel/maxkb}\\
+\textrm{docker~start~maxkb}
+
+\section{\rm{Ollama}的安装和使用}
+\textrm{docker~pull~ollama/ollama}\\
+\textrm{docker~run~-d~-v ollama:/root/.ollama -p 11434:11434 -\/-name ollama ollama/ollama}
+
+应用\textrm{MaxKB}结合\textrm{ollama}时需要选择其\textcolor{red}{\textrm{API Key}}，可以通过以下命令查看\\
+\textrm{docker~logs~ollama~>~ ollama\_log}\\
+\textrm{head~ollama\_log}\\
+可见内容为\\
+\textrm{Your new public key is:\\
+\\
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFd/oXqk86rbIQPV8Vj6bjOfULoU/cVpxzeasEgfk3}\\
+
+为了获得\textrm{API}~域名，该域名必须是外网可以访问的\textrm{(\url{http://127.0.0.1:11434}这种不可以)}
+
+安装适当版本的大语言模型\\
+\textrm{docker exec -it ollama ollama run llama2}\\
+\textrm{docker exec -it ollama ollama run llama3}
+
+\textrm{Linux}命令行下用\textrm{ollama}问答命令:\\
+\textrm{docker exec -it ollama ollama -\/-help}\\
+\textrm{docker exec -it ollama ollama list}\\
+\textrm{docker exec -it ollama ollama ps}\\
+\textrm{docker exec -it ollama ollama serve}\\
+\textrm{docker exec -it ollama ollama show}\\
+\textrm{docker exec -it ollama ollama show llama2}
+
+\section{用\textrm{cpolar}}
+\textrm{cpolar}是一种安全的内网穿透云服务，它将内网下的本地服务器通过安全隧道暴露至公网。使得公网用户可以正常访问内网服务。\\
+在官网用邮箱登陆后获得授权码，在本机上授权(一次性)\\
+\textrm{./cpolar~authtoken~ZTU2NDJjYWUtZWRmNS00YmZjLTkwZjYtYWJlODdkMDcwMmE2}
+
+\textrm{./cpolar version}\\
+\textrm{./cpolar service install}\\
+\textrm{./cpolar service restart }\\
+然后执行穿透
+
+\textrm{./cpolar http 11434}\\
+注意，在穿透期间不要关闭对话文件，穿透用的域名(对\textrm{ollama}就是\textrm{API}域名)在对话文件内
+
+如果需要更换域名名称，可用命令\textrm{./cpolar http 11434 restart}
 %-------------------The Figure Of The Paper------------------
 %\begin{figure}[h!]
 %\centering
