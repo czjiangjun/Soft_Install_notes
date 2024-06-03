@@ -131,8 +131,8 @@
 
 程序编译时指定生成调试信息，加编译选项\textcolor{red}{\textrm{-g}}
 
-\textrm{valgrind}生成分析结果\\
-\textrm{valgrind -\/-tool=memcheck -\/-leak-check=yes [执行软件名]}
+\textrm{valgrind}监测软件\\
+\textrm{valgrind -\/-tool=memcheck -\/-leak-check=full --log-file=memchk.log [执行软件名]}
 
 \subsection{\rm{KCacheGrind}}
 \textrm{KCacheGrind}是一个\textrm{Linux}下的性能分析工具，可以用来分析程序的运行时间和内存使用情况\\
@@ -144,5 +144,6 @@
 
 通过这些信息可以看到程序中哪些函数占用较多的时间，有针对性地进行优化
 
-
+通过\textrm{valgrind}分析程序后，用\textrm{Kcachegrind}分析结果
+\textrm{valgrind -\/-tool=callgrind -v [执行软件名]}
 
