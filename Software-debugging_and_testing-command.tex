@@ -1,0 +1,148 @@
+\documentclass[10pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%% CJK 中文版面控制  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{CJK} % CTEX-CJK 中文支持                            %
+\usepackage{xeCJK} % seperate the english and chinese		 %
+%\usepackage{CJKutf8} % Texlive 中文支持                          %
+\usepackage{CJKnumb} %中文序号                                   %
+\usepackage{indentfirst} % 中文段落首行缩进                      %
+%\setlength\parindent{22pt}       % 段落起始缩进量               %
+\renewcommand{\baselinestretch}{1.2} % 中文行间距调整            %
+\setlength{\textwidth}{16cm}                                     %
+\setlength{\textheight}{24cm}                                    %
+\setlength{\topmargin}{-1cm}                                     %
+\setlength{\oddsidemargin}{0.1cm}                                %
+\setlength{\evensidemargin}{\oddsidemargin}                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm}          %数学公式
+\usepackage{mathrsfs}                                    %英文花体
+
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+
+\usepackage{fontspec} % use to set font
+\setCJKmainfont{SimSun}
+\XeTeXlinebreaklocale "zh"  % Auto linebreak for chinese
+\XeTeXlinebreakskip = 0pt plus 1pt % Auto linebreak for chinese
+
+\usepackage{longtable}                                   %使用长表格
+
+%%%%%%%%%%%%%%%%%%%%%%%%%  参考文献引用 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%尽量使用 BibTeX(含有超链接，数据库的条目URL即可)                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[numbers,sort&compress]{natbib} %紧密排列             %
+\usepackage[sectionbib]{chapterbib}        %每章节单独参考文献   %
+\usepackage{hypernat}                                                                         %
+\usepackage[bookmarksopen=true,pdfstartview=FitH,CJKbookmarks]{hyperref}              %
+\hypersetup{bookmarksnumbered,colorlinks,linkcolor=green,citecolor=blue,urlcolor=red}         %
+%参考文献含有超链接引用时需要下列宏包，注意与natbib有冲突        %
+%\usepackage[dvipdfm]{hyperref}                                  %
+%\usepackage{hypernat}                                           %
+\newcommand{\upcite}[1]{\hspace{0ex}\textsuperscript{\cite{#1}}} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\AtBeginDvi{\special{pdf:tounicode GBK-EUC-UCS2}} %CTEX用dvipdfmx的话，用该命令可以解决      %
+%						   %pdf书签的中文乱码问题		      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%  % EPS 图片支持  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}                                            %
+\usepackage{xcolor}                                        %使用默认允许使用颜色
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+%\CJKindent     %在CJK环境中,中文段落起始缩进2个中文字符
+\graphicspath{{figure/}}
+%
+\renewcommand{\abstractname}{\small{\CJKfamily{hei} 摘\quad 要}} %\CJKfamily{hei} 设置中文字体，字号用\big \small来设
+\renewcommand{\refname}{\centering\CJKfamily{hei} 参考文献}
+%\renewcommand{\figurename}{\CJKfamily{hei} 图.}
+\renewcommand{\figurename}{{\bf Fig}.}
+%\renewcommand{\tablename}{\CJKfamily{hei} 表.}
+\renewcommand{\tablename}{{\bf Tab}.}
+
+%将图表的Caption写成 图(表) Num. 格式
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1. #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1. #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother
+
+\newcommand{\keywords}[1]{{\hspace{0\ccwd}\small{\CJKfamily{hei} 关键词:}{\hspace{2ex}{#1}}\bigskip}}
+
+%%%%%%%%%%%%%%%%%%中文字体设置%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%默认字体 defalut fonts \TeX 是一种排版工具 \\		%
+%{\bfseries 粗体 bold \TeX 是一种排版工具} \\		%
+%{\CJKfamily{song}宋体 songti \TeX 是一种排版工具} \\	%
+%{\CJKfamily{hei} 黑体 heiti \TeX 是一种排版工具} \\	%
+%{\CJKfamily{kai} 楷书 kaishu \TeX 是一种排版工具} \\	%
+%{\CJKfamily{fs} 仿宋 fangsong \TeX 是一种排版工具} \\	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\addcontentsline{toc}{section}{Bibliography}
+
+%-------------------------------The Title of The Paper-----------------------------------------%
+\title{软件的测试工具}
+%----------------------------------------------------------------------------------------------%
+
+%----------------------The Authors and the address of The Paper--------------------------------%
+\author{
+\small
+%Author1, Author2, Author3\footnote{Communication author's E-mail} \\    %Authors' Names	       %
+\small
+%(The Address，City Post code)						%Address	       %
+}
+\date{}					%if necessary					       %
+%----------------------------------------------------------------------------------------------%
+\maketitle
+
+%-------------------------------------------------------------------------------The Abstract and the keywords of The Paper----------------------------------------------------------------------------%
+%\begin{abstract}
+%The content of the abstract
+%\end{abstract}
+
+%\keywords {Keyword1; Keyword2; Keyword3}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+
+%----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
+%Introduction
+\section{\rm{GDB}调试}
+\textrm{sudo apt-get install gdb}
+
+\begin{itemize}
+	\item 启动未运行的程序，只需要在对应程序目录中使用下面的命令\\
+	 \textrm{gdb~Soft\_name}
+ \item 调试已经开始运行的程序进程\\
+	 先使用\textrm{top}命令查看运行的程序进程的\textrm{pid}\\
+	 \textrm{gdb~attach~[进程号]}
+\end{itemize}
+
+\section{\rm{valgrind}测试工具}\\
+\textrm{sudo apt-get install valgrind}
+
+程序编译时指定生成调试信息，加编译选项\textcolor{red}{\textrm{-g}}
+
+\textrm{valgrind}生成分析结果\\
+\textrm{valgrind -\/-tool=memcheck -\/-leak-check=yes [执行软件名]}
+
+\subsection{\rm{KCacheGrind}}
+\textrm{KCacheGrind}是一个\textrm{Linux}下的性能分析工具，可以用来分析程序的运行时间和内存使用情况\\
+\textrm{sudo apt-get install kcachegrind}
+
+在命令行输入\textrm{kcachegrind}命令，打开\textrm{kcachegrind}图形界面
+
+在\textrm{kcachegrind}的界面中，可以加载\textrm{Valgrind}工具分析出来的程序性能数据文件\textrm{(通常以\textcolor{red}{\textrm{.callgrind}}结尾的文件)}，然后就可以查看程序调用图、函数调用关系和函数调用的开销等信息
+
+通过这些信息可以看到程序中哪些函数占用较多的时间，有针对性地进行优化
+
+
+
