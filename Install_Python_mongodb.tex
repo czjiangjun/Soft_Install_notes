@@ -655,7 +655,8 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFd/oXqk86rbIQPV8Vj6bjOfULoU/cVpxzeasEgfk3
 
 安装适当版本的大语言模型\\
 \textrm{docker exec -it ollama ollama run llama2}\\
-\textrm{docker exec -it ollama ollama run llama3}
+\textrm{docker exec -it ollama ollama run llama3}\\
+\textrm{docker exec -it ollama ollama run gemma:7b} %\textrm{Gemma}是\textrm{Google~AI}的模型
 
 \textrm{Linux}命令行下用\textrm{ollama}问答命令:\\
 \textrm{docker exec -it ollama ollama -\/-help}\\
@@ -664,6 +665,9 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFd/oXqk86rbIQPV8Vj6bjOfULoU/cVpxzeasEgfk3
 \textrm{docker exec -it ollama ollama serve}\\
 \textrm{docker exec -it ollama ollama show}\\
 \textrm{docker exec -it ollama ollama show llama2}
+
+\subsection{基于\rm{OpenWebUI}下载\rm{Gemma}模型命令}
+\textrm{docker run -d -p 3000:8080 -\/-add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data -\/-name open-webui -\/-restart always ghcr.io/open-webui/open-webui:main}
 
 \section{用\textrm{cpolar}}
 \textrm{cpolar}是一种安全的内网穿透云服务，它将内网下的本地服务器通过安全隧道暴露至公网。使得公网用户可以正常访问内网服务。\\
