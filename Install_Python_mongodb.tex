@@ -640,6 +640,11 @@ port = 27017}}}
 \textrm{docker~start~maxkb}
 
 \section{\rm{Ollama}的安装和使用}
+通常安装命令:\\
+\textrm{curl -fsSL https://ollama.com/install.sh | sh}\\
+常常会连不上\textrm{github}
+
+建议采用\textrm{Docker}安装:\\
 \textrm{docker~pull~ollama/ollama}\\
 \textrm{docker~run~-d~-v ollama:/root/.ollama -p 11434:11434 -\/-name ollama ollama/ollama}
 
