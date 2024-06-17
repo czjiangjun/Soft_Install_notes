@@ -1,0 +1,9 @@
+FROM ubuntu:20.04
+
+RUN apt update && apt install -y --no-install-recommends \
+    libopenblas-openmp-dev liblapack-dev libscalapack-mpi-dev libelpa-dev libfftw3-dev libfftw3-mpi-dev libcereal-dev \
+    libxc-dev libgtest-dev libgmock-dev python3-numpy tcsh tar \
+    bc cmake git gfortran g++ make bc time sudo unzip vim wget csh
+
+ENV OMPI_ALLOW_RUN_AS_ROOT=1 OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1 OMPI_MCA_btl_vader_single_copy_mechanism=none  \
+    GIT_SSL_NO_VERIFY=true   TERM=xterm-256color

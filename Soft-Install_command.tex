@@ -897,7 +897,7 @@ Aborted (core dumped)}\\
 \textrm{sudo chomd a+r /etc/apt/keyrings/docker.gpg}
 
 添加\textrm{docker}在线安装源:\\
-``deb [arch=$(dpkg -\/-print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \backslash \\
+``deb [arch=\$(dpkg -\/-print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \backslash \\
 \$(. /etc/os-release \&\& echo "\$VERSION_CODENAME") stable" | \backslash \\
 sudo tee /etc/apt/source.list.d/docker.list > /dev/null
 
@@ -937,6 +937,29 @@ sudo tee /etc/apt/source.list.d/docker.list > /dev/null
 
 \textrm{/dev/shm}~目录，\textrm{shm}~代表共享内存。\textrm{/dev/shm}~是一个临时文件系统~(操作磁盘中的文件一样来将读写内存，换言之，用文件读写的语法来操作\textrm{/dev/shm/a.txt}，但是这个文件本质是存在内存里的，所以读写速度会非常快)。有了\textrm{/dev/shm}，可以让一个进程非常高效地存取一些临时文件，或者让多个进程非常高效的“共享内存”。这种“进程间快速共享内存”的能力对于很多机器学习框架来说非常有用。
 
+\subsection{\rm{docker}镜像无法使用解决方案}
+国内\textrm{docker}镜像源无法使用，添加镜像的步骤
+\begin{enumerate}
+	\item 配置镜像加速\\
+\textrm{sudo~tee~/etc/docker/daemon.json~<<EOF\\
+\{\\
+	\textrm{"registry-mirrors":~["https://do.nark.eu.org"]}\\
+\}\\
+\textrm{EOF}
+
+\item 重启加载\textrm{Docker}\\
+	\textrm{sudor~systemctl~daemon-reload}\\
+	\textrm{sudo~systemctl~restart~docker}
+
+\item 镜像拉取操作\\
+	\begin{itemize}
+		\item 原拉取镜像命令:\\
+
+			\textrm{docker~pull~xxx:latest}
+		\item 加速拉取镜像命令:\\
+			\textrm{docker~pull~\textcolor{bule}{do.nark.eu.org/}xxx:latest}
+	\end{itemize}
+\end{enumerate}
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 
