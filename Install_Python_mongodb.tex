@@ -671,6 +671,13 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbFd/oXqk86rbIQPV8Vj6bjOfULoU/cVpxzeasEgfk3
 \textrm{docker exec -it ollama ollama show}\\
 \textrm{docker exec -it ollama ollama show llama2}
 
+\subsection{基于\rm{webui}配置\rm{web}版访问}
+下载\textrm{ollama-webui}\\
+\textrm{docker pull ghcr.io/ollama-webui/ollama-webui:main}
+
+配置和启动\textrm{ollama-webui}\\
+\textrm{docker run -d -\/-network=host -v open-webui:/app/backend/data -e OLLAMA\_BASE\_URL=http://127.0.0.1:11434 -\/-name open-webui -\/-restart always ghcr.io/open-webui/open-webui:main}
+
 \subsection{基于\rm{OpenWebUI}下载\rm{Gemma}模型命令}
 \textrm{docker run -d -p 3000:8080 -\/-add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data -\/-name open-webui -\/-restart always ghcr.io/open-webui/open-webui:main}
 
