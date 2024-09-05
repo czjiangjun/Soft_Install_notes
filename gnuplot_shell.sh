@@ -12,15 +12,18 @@ server=
 sizel=1400
 sizeh=700
 ## x轴设置
-xmin=50
-xmax=1000
-xtics=50
+xmin=0
+xmax=11.5
+xtics=1
 ##左侧y轴坐标范围
-ymin=15000
-ymax=30000
+ymin=-1034.5
+ymax=-1026
 ## 数据文件路径
 dir=.
-file=abresult.dat
+#file=abresult.dat
+file=N-O_H-E
+file1=C-N_H-E
+file2=C-O_H-E_2
 
 function usage(){
     echo -e "命令格式: \n sh abdraw.sh < commands..>"
@@ -68,23 +71,30 @@ fi
 gnuplot -persist <<EOF
 
 set terminal png size $sizel,$sizeh font "/usr/share/fonts/kingsoft/simfang.ttf,14"
-set output "$dir/ab测试结果.png"
-set title "ab测试 $server"
+set key font "/usr/share/fonts/kingsoft/simfang.ttf,8"
+set output "$dir/$file-3.png"
+set title "Energy vs Distance $server"
 set size 1,0.8
 set grid y
-set xlabel "并发数"
+set xlabel "C-H/N-H/O-H Distance"
 set xrange [$xmin:$xmax]
 set xtics $xtics
 
-set ylabel "吞吐率"
+set ylabel "Energy"
 set yrange [$ymin:$ymax]
 set ytics nomirror
 
-set y2label "响应时间/y2"
+#set y2label "响应时间/y2"
 # set y2tics
 
-plot "$dir/$file" using 1:2 smooth sbezier with line axis x1y1 title "吞吐率"\
-, "$dir/$file" using 1:3 smooth sbezier with linespoint pointtype 3 axis x1y2 title "相应时间/y2轴" 
+#plot "$dir/$file" using 1:2 smooth sbezier with line axis x1y1 title "吞吐率" \
+#, "$dir/$file" using 3:4 smooth  with linespoint pointtype 3 axis x2y1 title "相应时间/y2轴" 
+plot  "$dir/$file1" using 1:2  with linespoint pointtype 5 title "E_{vs}C-H (CN)" \
+, "$dir/$file1" using 3:4  with linespoint pointtype 7 title "E_{vs}N-H (CN)"  \
+, "$dir/$file2" using 1:2  with linespoint pointtype 9 title "E_{vs}C-H (CO)"  \
+, "$dir/$file2" using 3:4  with linespoint pointtype 11 title "E_{vs}O-H (CO)" \
+, "$dir/$file" using 1:2 with linespoint pointtype 1 title "E_{vs}N-H (NO)"   \
+, "$dir/$file" using 3:4  with linespoint pointtype 3 title "E_{vs}O-H (NO)" 
 
 set output
 EOF
