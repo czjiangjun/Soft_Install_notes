@@ -1,7 +1,9 @@
 set terminal pngcairo size 800,600
 # set terminal pngcairo size $sizel,$sizeh font "/usr/share/fonts/kingsoft/simfang.ttf,14"
-
+# set term pngcairo lw 2 font "AR PL UKai CN, 14" # 设置中文字体为 AR PL UKai CN (问鼎简中楷)
+# set terminal pdfcairo size $sizel,$sizeh lw2 font "Times New Roman, 8"   # postscript terminal 下很难使用中文字体, pdf则容易得多
 # set terminal postscript eps color enhanced # size $sizel,$sizeh ## eps 格式不要设置 size
+
 set font "/usr/share/fonts/kingsoft/simfang.ttf,14"
 set key font "/usr/share/fonts/kingsoft/simfang.ttf,8"
 set output 'demo.png'
