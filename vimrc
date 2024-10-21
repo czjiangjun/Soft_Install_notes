@@ -92,3 +92,27 @@ let g:tex_flavor='latex'
 set nofen  
 let g:Tex_DefaultTargetFormat='pdf'  
 let g:Tex_CompileRule_pdf='pdflatex -interaction=nonstopmode $*'
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'vim-latex/vim-latex'
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+filetype plugin on
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+call plug#end()
+
+autocmd InsertLeave * write
+
+autocmd FocusLost * if &mod | write | endif
