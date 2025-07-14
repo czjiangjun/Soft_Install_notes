@@ -115,6 +115,11 @@
 
 %----------------------------------------------------------------------------------------The Body Of The Paper----------------------------------------------------------------------------------------%
 %Introduction
+\textrm{CP2k}脚本安装软件有极大的方便，其脚本的位置在
+\textrm{\backslash\$CP2k\_install\_dir\backslash tools\backslash toolchai\backslash scripts\backslash stage[i]\backslash XXX.sh}\\
+安装过程中由以\textrm{gcc}安装需要注意，\textrm{configure}中需要设置
+\textrm{unset LIBRARY\_PATH CPATH C\_INCLUDE\_PATH PKG\_CONFIG_PATH CPLUS\_INCLUDE\_PATH INCLUDE}
+
 \textrm{WIEN2k}软件是在\textrm{Linux~}系统下安装、运行的第一原理计算软件，其编译、安装主要参考\textrm{WIEN2k\_Users-Guide}\upcite{WIEN2K-UG_2001}的第\textrm{11}章\textrm{Installation and Dimensioning}。
 
 除了\textrm{Linux}操作系统，编译、安装环境建议如下，(以下括号中的版本号都是我当前使用的版本)：\\
@@ -886,15 +891,7 @@ Aborted (core dumped)}\\
 
 \textrm{rpm2cpio xxxx.rpm | cpio -idvm}\\
 这样会把软件安装在当前目录下
-
-\section{\rm{systemctl}}
-\textrm{systemctl}是\textrm{systemd}的命令行工具，主要用于控制\textrm{systemd}系统和服务管理器
-重启指定服务:~使用\textrm{systemctl restart}服务名命令来重新启动一个服务。例如，要重启\textrm{Apache}服务，可以使用\textrm{systemctl restart httpd}。
-
-查看服务状态:~使用\textrm{systemctl status}服务名来检查服务是否正常运型
-
-
-
+\end{document}
 
 \section{\rm{Docker}}
 \textrm{Ubuntu}下\textrm{Docker}的安装:\\
@@ -971,7 +968,6 @@ sudo tee /etc/apt/source.list.d/docker.list > /dev/null
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 
-\end{document}
 %--------------------------------------------------------------------------The Biblography of The Paper-----------------------------------------------------------------%
 %\newpage																				%
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
@@ -987,5 +983,3 @@ sudo tee /etc/apt/source.list.d/docker.list > /dev/null
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------%
 
 \clearpage     %\end{CJK} 前加上\clearpage是CJK的要求
-
-\section{}<++>
