@@ -229,12 +229,12 @@
 \begin{enumerate}
 	\item 拷贝中文字体进入 \textrm{/usr/share/fonts/Windows}~里面，没有此文件夹自己创建\\
 		常用的6个字体是:~宋体(\textrm{simsun.ttf})、仿宋(\textrm{simfang.ttf})、黑体(\textrm{simhei.ttf})、楷体(\textrm{simkai.ttf})、隶书(\textrm{simli.ttf})、幼圆(\textrm{simyou.ttf})
-	\item 执行如下命令:~
+	\item 用\textrm{sudo}执行如下命令:~
 \$~\textrm{cd~/usr/share/fonts/Windows}\\
 \$~\textrm{chmod~777~*} \#因为原有权限为600，改为644/777\\
 \$~\textrm{mkfontscale}\\
 \$~\textrm{mkfontdir}\\
-\$~\textrm{fc-cache}
+\$~\textrm{fc-cache -fsv}\\建议分别用\textrm{sudo}和本地账号分别执行一遍
 \item 测试字体是否安装完毕
 	\$~\textrm{fc-list}
 \end{enumerate}
