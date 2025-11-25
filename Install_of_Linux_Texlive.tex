@@ -323,6 +323,7 @@ git clone git@github.com:vim-airline/vim-airline.git
 \end{itemize}
 
 \section{Virtualbox}
+\subsection{Ubuntu下挂载Virtualbox}
 \textcolor{blue}{\textrm{VirtualBox kernel driver not installed.\\
 The vboxdrv kernel module was either not loaded or /dev/vboxdrv was not created for some reason.\\
 ‘/etc/init.d/vboxdrv setup’\\
@@ -346,6 +347,21 @@ Recompiling VirtualBox kernel modules ...failed!\\
 \textcolor{red}{\textrm{sudo apt-get install linux-headers-\$(uname -r)\\
 	\textrm{sudo apt-get install dkms}\\
 	\textrm{sudo /etc/init.d/vboxdrv setup}}}
+
+\subsection{Windows下载Virtualbox}
+自动挂载\textrm{Window}共享文件
+# 安装依赖（以Debian/Ubuntu为例）
+sudo apt install build-essential linux-headers-$(uname -r)\\
+# 虚拟机菜单中点击``设备'' → ``安装增强功能''，然后挂载并安装
+sudo mount /dev/cdrom /mnt
+sudo /mnt/VBoxLinuxAdditions.run
+
+# 创建挂载点（若不存在）
+sudo mkdir -p /media/sf_D_DRIVE
+# 挂载共享文件夹（替换「D_DRIVE」为你的共享文件夹名）
+sudo mount -t vboxsf D_DRIVE /media/sf_D_DRIVE
+
+echo "D_DRIVE /media/sf_D_DRIVE vboxsf defaults 0 0" | sudo tee -a /etc/fstab
 
 \section{\rm{Ubuntu}下的有线网络链接}
 有线宽带在\textrm{Windows}下可以正常连接，不过在\textrm{Ubuntu}下死活连不上，基本可以排除宽带线路问题和机器的网卡硬件问题，所以问题应该是出在\textrm{Ubuntu}系统设置或驱动上。解决方式:
