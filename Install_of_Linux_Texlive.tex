@@ -358,9 +358,9 @@ sudo /mnt/VBoxLinuxAdditions.run
 
 # 创建挂载点（若不存在）
 sudo mkdir -p /media/sf_D_DRIVE
+
 # 挂载共享文件夹（替换「D_DRIVE」为你的共享文件夹名）
 sudo mount -t vboxsf D_DRIVE /media/sf_D_DRIVE
-
 echo "D_DRIVE /media/sf_D_DRIVE vboxsf defaults 0 0" | sudo tee -a /etc/fstab
 
 \section{\rm{Ubuntu}下的有线网络链接}
